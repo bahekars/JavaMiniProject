@@ -4,10 +4,18 @@
  */
 package models;
 
+import java.time.LocalDate;
+
+
 /**
  *
  * @author sid
  */
 public class Patient {
-    
+    private Integer patientID;
+    private String name;
+    private LocalDate dob;
+    private String contactNumber;
+    private String userName;
+    private String password;
 }
