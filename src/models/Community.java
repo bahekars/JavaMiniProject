@@ -9,5 +9,7 @@ package models;
  * @author sid
  */
 public class Community {
+    private Integer communityID;
+    private String name;
     
 }
