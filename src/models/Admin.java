@@ -9,5 +9,8 @@ package models;
  * @author sid
  */
 public class Admin {
-    
+    private Integer adminID;
+    private String name;
+    private String userName;
+    private String password;
 }

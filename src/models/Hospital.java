@@ -9,5 +9,8 @@ package models;
  * @author sid
  */
 public class Hospital {
-    
+    private Integer hospitalID;
+    private String name;
+    private String location;
+    private Community community;
 }
