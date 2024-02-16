@@ -58,7 +58,6 @@ public class MainFrame extends javax.swing.JFrame {
         LabelDiagnosis = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         TextDiagnosis = new javax.swing.JTextArea();
-        DateChooser = new com.toedter.calendar.JDateChooser();
         ButtonDisplay = new javax.swing.JButton();
         LabelDoctor = new javax.swing.JLabel();
         DocBotPanel = new javax.swing.JPanel();
@@ -231,14 +230,9 @@ public class MainFrame extends javax.swing.JFrame {
                     .addGroup(DocTopPanelLayout.createSequentialGroup()
                         .addGroup(DocTopPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(DocTopPanelLayout.createSequentialGroup()
-                                .addGroup(DocTopPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(DocTopPanelLayout.createSequentialGroup()
-                                        .addGap(41, 41, 41)
-                                        .addComponent(LabelDate))
-                                    .addGroup(DocTopPanelLayout.createSequentialGroup()
-                                        .addContainerGap()
-                                        .addComponent(DateChooser, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                .addGap(74, 74, 74)
+                                .addGap(41, 41, 41)
+                                .addComponent(LabelDate)
+                                .addGap(131, 131, 131)
                                 .addGroup(DocTopPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(LabelBlood)
                                     .addComponent(LabelHeart)
@@ -253,7 +247,7 @@ public class MainFrame extends javax.swing.JFrame {
                             .addGroup(DocTopPanelLayout.createSequentialGroup()
                                 .addGap(213, 213, 213)
                                 .addComponent(ButtonDisplay, javax.swing.GroupLayout.PREFERRED_SIZE, 201, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 28, Short.MAX_VALUE)
                         .addGroup(DocTopPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(DocTopPanelLayout.createSequentialGroup()
@@ -296,17 +290,12 @@ public class MainFrame extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(LabelTemp)
                         .addGap(6, 6, 6)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 24, Short.MAX_VALUE)
                 .addGroup(DocTopPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(DocTopPanelLayout.createSequentialGroup()
-                        .addGroup(DocTopPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(LabelResp, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(TextResp, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(18, 18, 18)
-                        .addComponent(ButtonDisplay))
-                    .addGroup(DocTopPanelLayout.createSequentialGroup()
-                        .addGap(6, 6, 6)
-                        .addComponent(DateChooser, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                    .addComponent(LabelResp, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(TextResp, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addComponent(ButtonDisplay))
             .addGroup(DocTopPanelLayout.createSequentialGroup()
                 .addGap(0, 0, Short.MAX_VALUE)
                 .addComponent(LabelDiagnosis)
@@ -540,7 +529,6 @@ public class MainFrame extends javax.swing.JFrame {
     private javax.swing.JButton ButtonAddHosp;
     private javax.swing.JButton ButtonCommunity;
     private javax.swing.JButton ButtonDisplay;
-    private com.toedter.calendar.JDateChooser DateChooser;
     private javax.swing.JPanel DocBotPanel;
     private javax.swing.JSplitPane DocSplitPane;
     private javax.swing.JPanel DocTopPanel;

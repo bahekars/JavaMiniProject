@@ -252,17 +252,9 @@
                                       <Group type="102" attributes="0">
                                           <Group type="103" groupAlignment="0" attributes="0">
                                               <Group type="102" alignment="0" attributes="0">
-                                                  <Group type="103" groupAlignment="0" attributes="0">
-                                                      <Group type="102" attributes="0">
-                                                          <EmptySpace min="-2" pref="41" max="-2" attributes="0"/>
-                                                          <Component id="LabelDate" min="-2" max="-2" attributes="0"/>
-                                                      </Group>
-                                                      <Group type="102" alignment="0" attributes="0">
-                                                          <EmptySpace max="-2" attributes="0"/>
-                                                          <Component id="DateChooser" min="-2" pref="123" max="-2" attributes="0"/>
-                                                      </Group>
-                                                  </Group>
-                                                  <EmptySpace min="-2" pref="74" max="-2" attributes="0"/>
+                                                  <EmptySpace min="-2" pref="41" max="-2" attributes="0"/>
+                                                  <Component id="LabelDate" min="-2" max="-2" attributes="0"/>
+                                                  <EmptySpace min="-2" pref="131" max="-2" attributes="0"/>
                                                   <Group type="103" groupAlignment="0" attributes="0">
                                                       <Component id="LabelBlood" min="-2" max="-2" attributes="0"/>
                                                       <Component id="LabelHeart" min="-2" max="-2" attributes="0"/>
@@ -282,7 +274,7 @@
                                                   <Component id="ButtonDisplay" min="-2" pref="201" max="-2" attributes="0"/>
                                               </Group>
                                           </Group>
-                                          <EmptySpace max="32767" attributes="0"/>
+                                          <EmptySpace pref="28" max="32767" attributes="0"/>
                                           <Group type="103" groupAlignment="0" attributes="0">
                                               <Component id="jScrollPane1" min="-2" pref="148" max="-2" attributes="0"/>
                                               <Group type="102" alignment="0" attributes="0">
@@ -341,21 +333,13 @@
                                           <EmptySpace min="-2" pref="6" max="-2" attributes="0"/>
                                       </Group>
                                   </Group>
-                                  <EmptySpace max="32767" attributes="0"/>
+                                  <EmptySpace pref="24" max="32767" attributes="0"/>
                                   <Group type="103" groupAlignment="0" attributes="0">
-                                      <Group type="102" alignment="0" attributes="0">
-                                          <Group type="103" groupAlignment="0" attributes="0">
-                                              <Component id="LabelResp" alignment="1" min="-2" max="-2" attributes="0"/>
-                                              <Component id="TextResp" alignment="1" min="-2" max="-2" attributes="0"/>
-                                          </Group>
-                                          <EmptySpace type="separate" max="-2" attributes="0"/>
-                                          <Component id="ButtonDisplay" min="-2" max="-2" attributes="0"/>
-                                      </Group>
-                                      <Group type="102" alignment="0" attributes="0">
-                                          <EmptySpace min="-2" pref="6" max="-2" attributes="0"/>
-                                          <Component id="DateChooser" min="-2" max="-2" attributes="0"/>
-                                      </Group>
+                                      <Component id="LabelResp" alignment="1" min="-2" max="-2" attributes="0"/>
+                                      <Component id="TextResp" alignment="1" min="-2" max="-2" attributes="0"/>
                                   </Group>
+                                  <EmptySpace type="separate" max="-2" attributes="0"/>
+                                  <Component id="ButtonDisplay" min="-2" max="-2" attributes="0"/>
                               </Group>
                               <Group type="102" attributes="0">
                                   <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
@@ -428,8 +412,6 @@
                             </Component>
                           </SubComponents>
                         </Container>
-                        <Component class="com.toedter.calendar.JDateChooser" name="DateChooser">
-                        </Component>
                         <Component class="javax.swing.JButton" name="ButtonDisplay">
                           <Properties>
                             <Property name="text" type="java.lang.String" value="Display"/>

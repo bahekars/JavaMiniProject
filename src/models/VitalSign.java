@@ -10,6 +10,62 @@ package models;
  */
 public class VitalSign {
     private Integer vitalsignID;
+
+    @Override
+    public String toString() {
+        return "VitalSign{" + "vitalsignID=" + vitalsignID + ", heartRate=" + heartRate + ", bloodPressure=" + bloodPressure + ", temprature=" + temprature + ", respiratoryRate=" + respiratoryRate + '}';
+    }
+
+    public Integer getVitalsignID() {
+        return vitalsignID;
+    }
+
+    public void setVitalsignID(Integer vitalsignID) {
+        this.vitalsignID = vitalsignID;
+    }
+
+    public Integer getHeartRate() {
+        return heartRate;
+    }
+
+    public void setHeartRate(Integer heartRate) {
+        this.heartRate = heartRate;
+    }
+
+    public String getBloodPressure() {
+        return bloodPressure;
+    }
+
+    public void setBloodPressure(String bloodPressure) {
+        this.bloodPressure = bloodPressure;
+    }
+
+    public Double getTemprature() {
+        return temprature;
+    }
+
+    public void setTemprature(Double temprature) {
+        this.temprature = temprature;
+    }
+
+    public Integer getRespiratoryRate() {
+        return respiratoryRate;
+    }
+
+    public void setRespiratoryRate(Integer respiratoryRate) {
+        this.respiratoryRate = respiratoryRate;
+    }
+
+    public VitalSign(Integer vitalsignID, Integer heartRate, String bloodPressure, Double temprature, Integer respiratoryRate) {
+        this.vitalsignID = vitalsignID;
+        this.heartRate = heartRate;
+        this.bloodPressure = bloodPressure;
+        this.temprature = temprature;
+        this.respiratoryRate = respiratoryRate;
+    }
+
+    public VitalSign() {
+    }
     private Integer heartRate;
     private String bloodPressure;
     private Double temprature;
