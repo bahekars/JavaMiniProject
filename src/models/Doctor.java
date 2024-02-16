@@ -9,5 +9,10 @@ package models;
  * @author sid
  */
 public class Doctor {
-    
+    private Integer doctorID;
+    private String name;
+    private String specialization;
+    private Hospital hospital;
+    private String userName;
+    private String password;
 }

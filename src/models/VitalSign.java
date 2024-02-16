@@ -9,5 +9,9 @@ package models;
  * @author sid
  */
 public class VitalSign {
-    
+    private Integer vitalsignID;
+    private Integer heartRate;
+    private String bloodPressure;
+    private Double temprature;
+    private Integer respiratoryRate;
 }

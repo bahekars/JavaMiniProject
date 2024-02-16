@@ -4,10 +4,16 @@
  */
 package models;
 
+import java.time.LocalDate;
+
 /**
  *
  * @author sid
  */
 public class Encounter {
-    
+    private Integer encounterID;
+    private LocalDate date;
+    private Doctor doctor;
+    private VitalSign vitalSign;
+    private String diagnosis;
 }
