@@ -62,6 +62,19 @@ public class Encounter {
     public String toString() {
         return super.toString(); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/OverriddenMethodBody
     }
+
+    public Encounter() {
+    }
+
+    public Encounter(Integer encounterID, LocalDate date, Patient patient, VitalSign vitalSign, String diagnosis) {
+        this.encounterID = encounterID;
+        this.date = date;
+        this.patient = patient;
+        this.vitalSign = vitalSign;
+        this.diagnosis = diagnosis;
+    }
+    
+    
     
     
 }

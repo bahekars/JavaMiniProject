@@ -4,14 +4,24 @@
  */
 package view;
 
+import java.time.LocalDate;
+import java.util.ArrayList;
 import javax.swing.JOptionPane;
+import models.Community;
+import models.Hospital;
+import models.Patient;
+import models.Encounter;
+import models.VitalSign;
 
 /**
  *
  * @author sid
  */
 public class MainFrame extends javax.swing.JFrame {
-
+public ArrayList<Community> CommunityList;
+public ArrayList<Hospital> HospitalList;
+public ArrayList<Patient> PatientList;
+public ArrayList<Encounter> EncounterList;
     /**
      * Creates new form MainFrame
      */
@@ -42,6 +52,7 @@ public class MainFrame extends javax.swing.JFrame {
         locationLabel = new javax.swing.JLabel();
         locationTextField = new javax.swing.JTextField();
         searchButton = new javax.swing.JButton();
+        error = new javax.swing.JLabel();
         DoctorPanel = new javax.swing.JPanel();
         DocSplitPane = new javax.swing.JSplitPane();
         DocTopPanel = new javax.swing.JPanel();
@@ -60,6 +71,7 @@ public class MainFrame extends javax.swing.JFrame {
         patientContactNoField = new javax.swing.JTextField();
         patientDobField = new com.toedter.calendar.JDateChooser();
         addPatientButton = new javax.swing.JButton();
+        newPatientError = new javax.swing.JLabel();
         addEncounterPanel = new javax.swing.JPanel();
         encounterDateLabel = new javax.swing.JLabel();
         encounterVitalSignLabel = new javax.swing.JLabel();
@@ -78,6 +90,7 @@ public class MainFrame extends javax.swing.JFrame {
         encounterDiagnosisField = new javax.swing.JTextArea();
         encounterDateField = new com.toedter.calendar.JDateChooser();
         addEncounterButton = new javax.swing.JButton();
+        errorEncounter = new javax.swing.JLabel();
         viewPatientPanel = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         AdminPanel = new javax.swing.JPanel();
@@ -94,6 +107,7 @@ public class MainFrame extends javax.swing.JFrame {
         ButtonAddHosp = new javax.swing.JButton();
         jScrollPane3 = new javax.swing.JScrollPane();
         jTable2 = new javax.swing.JTable();
+        errorAdmin = new javax.swing.JLabel();
 
         jButton1.setText("jButton1");
 
@@ -116,9 +130,9 @@ public class MainFrame extends javax.swing.JFrame {
                 .addComponent(PatientView, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(117, 117, 117)
                 .addComponent(DoctorView, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 153, Short.MAX_VALUE)
+                .addGap(149, 149, 149)
                 .addComponent(AdminView, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(59, 59, 59))
+                .addContainerGap(173, Short.MAX_VALUE))
         );
         TopPanelLayout.setVerticalGroup(
             TopPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -140,18 +154,24 @@ public class MainFrame extends javax.swing.JFrame {
 
         HospitalDetails.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null}
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
             },
             new String [] {
-                "Name", "Location", "Community"
+                "Name", "Location", "Community", "Doctor"
             }
         ));
         HospitalTable.setViewportView(HospitalDetails);
 
         locationLabel.setText("Enter Location :");
+
+        locationTextField.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                locationTextFieldFocusLost(evt);
+            }
+        });
 
         searchButton.setText("Search");
         searchButton.addActionListener(new java.awt.event.ActionListener() {
@@ -160,10 +180,16 @@ public class MainFrame extends javax.swing.JFrame {
             }
         });
 
+        error.setForeground(new java.awt.Color(255, 51, 51));
+
         javax.swing.GroupLayout PatientPanelLayout = new javax.swing.GroupLayout(PatientPanel);
         PatientPanel.setLayout(PatientPanelLayout);
         PatientPanelLayout.setHorizontalGroup(
             PatientPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, PatientPanelLayout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(error, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(332, 332, 332))
             .addGroup(PatientPanelLayout.createSequentialGroup()
                 .addGroup(PatientPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(PatientPanelLayout.createSequentialGroup()
@@ -175,12 +201,12 @@ public class MainFrame extends javax.swing.JFrame {
                         .addGap(81, 81, 81)
                         .addComponent(locationTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 213, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(PatientPanelLayout.createSequentialGroup()
-                        .addGap(251, 251, 251)
+                        .addGap(250, 250, 250)
                         .addComponent(searchButton, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(PatientPanelLayout.createSequentialGroup()
-                        .addGap(81, 81, 81)
+                        .addGap(118, 118, 118)
                         .addComponent(HospitalTable, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(140, Short.MAX_VALUE))
+                .addContainerGap(213, Short.MAX_VALUE))
         );
         PatientPanelLayout.setVerticalGroup(
             PatientPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -192,10 +218,12 @@ public class MainFrame extends javax.swing.JFrame {
                     .addComponent(locationLabel)
                     .addComponent(locationTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
+                .addComponent(error, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(28, 28, 28)
                 .addComponent(searchButton)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 87, Short.MAX_VALUE)
+                .addGap(120, 120, 120)
                 .addComponent(HospitalTable, javax.swing.GroupLayout.PREFERRED_SIZE, 242, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(84, 84, 84))
+                .addContainerGap(171, Short.MAX_VALUE))
         );
 
         BottomPanel.add(PatientPanel, "card2");
@@ -226,19 +254,17 @@ public class MainFrame extends javax.swing.JFrame {
             .addGroup(DocTopPanelLayout.createSequentialGroup()
                 .addGroup(DocTopPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(DocTopPanelLayout.createSequentialGroup()
+                        .addGap(289, 289, 289)
+                        .addComponent(LabelDoctor)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(DocTopPanelLayout.createSequentialGroup()
                         .addGap(78, 78, 78)
                         .addComponent(newPatientViewButton)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(viewPatientButton)
-                        .addGap(52, 52, 52))
-                    .addGroup(DocTopPanelLayout.createSequentialGroup()
-                        .addGroup(DocTopPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(newEncounterButton)
-                            .addGroup(DocTopPanelLayout.createSequentialGroup()
-                                .addGap(289, 289, 289)
-                                .addComponent(LabelDoctor)))
-                        .addGap(0, 290, Short.MAX_VALUE)))
-                .addContainerGap())
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 75, Short.MAX_VALUE)
+                        .addComponent(newEncounterButton)
+                        .addGap(66, 66, 66)))
+                .addComponent(viewPatientButton)
+                .addGap(148, 148, 148))
         );
         DocTopPanelLayout.setVerticalGroup(
             DocTopPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -250,7 +276,7 @@ public class MainFrame extends javax.swing.JFrame {
                     .addComponent(newPatientViewButton)
                     .addComponent(newEncounterButton)
                     .addComponent(viewPatientButton))
-                .addContainerGap(32, Short.MAX_VALUE))
+                .addContainerGap(231, Short.MAX_VALUE))
         );
 
         DocSplitPane.setTopComponent(DocTopPanel);
@@ -265,13 +291,43 @@ public class MainFrame extends javax.swing.JFrame {
 
         patientContactNoLabel.setText("Contact No");
 
+        patientNameField.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                patientNameFieldFocusLost(evt);
+            }
+        });
+
+        patientIdField.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                patientIdFieldFocusLost(evt);
+            }
+        });
         patientIdField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 patientIdFieldActionPerformed(evt);
             }
         });
 
+        patientContactNoField.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                patientContactNoFieldFocusLost(evt);
+            }
+        });
+
+        patientDobField.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                patientDobFieldFocusLost(evt);
+            }
+        });
+
         addPatientButton.setText("Add New Patient");
+        addPatientButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                addPatientButtonActionPerformed(evt);
+            }
+        });
+
+        newPatientError.setForeground(new java.awt.Color(255, 51, 51));
 
         javax.swing.GroupLayout addPatientPanelLayout = new javax.swing.GroupLayout(addPatientPanel);
         addPatientPanel.setLayout(addPatientPanelLayout);
@@ -291,11 +347,12 @@ public class MainFrame extends javax.swing.JFrame {
                             .addComponent(patientIdField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(patientNameField, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(patientDobField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(patientContactNoField, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(patientContactNoField, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(newPatientError)))
                     .addGroup(addPatientPanelLayout.createSequentialGroup()
-                        .addGap(243, 243, 243)
+                        .addGap(242, 242, 242)
                         .addComponent(addPatientButton)))
-                .addContainerGap(285, Short.MAX_VALUE))
+                .addContainerGap(369, Short.MAX_VALUE))
         );
         addPatientPanelLayout.setVerticalGroup(
             addPatientPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -316,9 +373,11 @@ public class MainFrame extends javax.swing.JFrame {
                 .addGroup(addPatientPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(patientContactNoLabel)
                     .addComponent(patientContactNoField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(49, 49, 49)
+                .addComponent(newPatientError)
+                .addGap(18, 18, 18)
                 .addComponent(addPatientButton)
-                .addGap(39, 39, 39))
+                .addContainerGap(61, Short.MAX_VALUE))
         );
 
         DocBotPanel.add(addPatientPanel, "card2");
@@ -329,7 +388,11 @@ public class MainFrame extends javax.swing.JFrame {
 
         diagnosisLabel.setText("Diagnosis:");
 
-        encounterHeartField.setText("jTextField1");
+        encounterHeartField.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                encounterHeartFieldFocusLost(evt);
+            }
+        });
 
         encounterHeartRateLabel.setText("HeartRate:");
 
@@ -341,17 +404,53 @@ public class MainFrame extends javax.swing.JFrame {
 
         encounterPatientLabel.setText("Patient Id:");
 
-        EncounterBloodField.setText("jTextField1");
+        encounterPatientIdField.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                encounterPatientIdFieldFocusLost(evt);
+            }
+        });
 
-        encounterTemperatureField.setText("jTextField1");
+        EncounterBloodField.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                EncounterBloodFieldFocusLost(evt);
+            }
+        });
 
-        encounterRespField.setText("jTextField1");
+        encounterTemperatureField.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                encounterTemperatureFieldFocusLost(evt);
+            }
+        });
+
+        encounterRespField.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                encounterRespFieldFocusLost(evt);
+            }
+        });
 
         encounterDiagnosisField.setColumns(20);
         encounterDiagnosisField.setRows(5);
+        encounterDiagnosisField.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                encounterDiagnosisFieldFocusLost(evt);
+            }
+        });
         jScrollPane1.setViewportView(encounterDiagnosisField);
 
+        encounterDateField.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                encounterDateFieldFocusLost(evt);
+            }
+        });
+
         addEncounterButton.setText("Add Encounter");
+        addEncounterButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                addEncounterButtonActionPerformed(evt);
+            }
+        });
+
+        errorEncounter.setForeground(new java.awt.Color(255, 51, 51));
 
         javax.swing.GroupLayout addEncounterPanelLayout = new javax.swing.GroupLayout(addEncounterPanel);
         addEncounterPanel.setLayout(addEncounterPanelLayout);
@@ -392,11 +491,14 @@ public class MainFrame extends javax.swing.JFrame {
                             .addComponent(encounterTemperatureField, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(EncounterBloodField, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(encounterRespField, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(encounterHeartField, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addGroup(addEncounterPanelLayout.createSequentialGroup()
+                                .addComponent(encounterHeartField, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 248, Short.MAX_VALUE)
+                                .addComponent(errorEncounter, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE))))
                     .addGroup(addEncounterPanelLayout.createSequentialGroup()
                         .addGap(254, 254, 254)
                         .addComponent(addEncounterButton)))
-                .addContainerGap(221, Short.MAX_VALUE))
+                .addGap(123, 123, 123))
         );
         addEncounterPanelLayout.setVerticalGroup(
             addEncounterPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -411,10 +513,15 @@ public class MainFrame extends javax.swing.JFrame {
                     .addComponent(encounterDateField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(26, 26, 26)
                 .addComponent(encounterVitalSignLabel)
-                .addGap(27, 27, 27)
-                .addGroup(addEncounterPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(encounterHeartRateLabel)
-                    .addComponent(encounterHeartField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(addEncounterPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(addEncounterPanelLayout.createSequentialGroup()
+                        .addGap(27, 27, 27)
+                        .addGroup(addEncounterPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(encounterHeartRateLabel)
+                            .addComponent(encounterHeartField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, addEncounterPanelLayout.createSequentialGroup()
+                        .addGap(14, 14, 14)
+                        .addComponent(errorEncounter, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(18, 18, 18)
                 .addGroup(addEncounterPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(encounterBloodPressureLabel)
@@ -431,9 +538,8 @@ public class MainFrame extends javax.swing.JFrame {
                 .addGroup(addEncounterPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(diagnosisLabel)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addComponent(addEncounterButton)
-                .addGap(14, 14, 14))
+                .addGap(32, 32, 32)
+                .addComponent(addEncounterButton))
         );
 
         DocBotPanel.add(addEncounterPanel, "card3");
@@ -447,14 +553,14 @@ public class MainFrame extends javax.swing.JFrame {
             .addGroup(viewPatientPanelLayout.createSequentialGroup()
                 .addGap(61, 61, 61)
                 .addComponent(jLabel1)
-                .addContainerGap(597, Short.MAX_VALUE))
+                .addContainerGap(684, Short.MAX_VALUE))
         );
         viewPatientPanelLayout.setVerticalGroup(
             viewPatientPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(viewPatientPanelLayout.createSequentialGroup()
                 .addGap(163, 163, 163)
                 .addComponent(jLabel1)
-                .addContainerGap(238, Short.MAX_VALUE))
+                .addContainerGap(244, Short.MAX_VALUE))
         );
 
         DocBotPanel.add(viewPatientPanel, "card4");
@@ -477,17 +583,51 @@ public class MainFrame extends javax.swing.JFrame {
         LabelAdmin.setFont(new java.awt.Font("Helvetica Neue", 1, 18)); // NOI18N
         LabelAdmin.setText("Admin Controls");
 
+        TextCommunity.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                TextCommunityFocusLost(evt);
+            }
+        });
+
         LabelCommunity.setText("Community Name");
 
         ButtonCommunity.setText("Add Community");
+        ButtonCommunity.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ButtonCommunityActionPerformed(evt);
+            }
+        });
 
         LabelHospName.setText("Hospital Name");
 
+        TextHospName.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                TextHospNameFocusLost(evt);
+            }
+        });
+
         LabelHospLoc.setText("Hospital Location");
+
+        TextHospLoc.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                TextHospLocFocusLost(evt);
+            }
+        });
 
         jLabel2.setText("Hospital Community");
 
+        TextHospComm.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                TextHospCommFocusLost(evt);
+            }
+        });
+
         ButtonAddHosp.setText("Add Hospital");
+        ButtonAddHosp.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ButtonAddHospActionPerformed(evt);
+            }
+        });
 
         jTable2.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -502,14 +642,12 @@ public class MainFrame extends javax.swing.JFrame {
         ));
         jScrollPane3.setViewportView(jTable2);
 
+        errorAdmin.setForeground(new java.awt.Color(255, 51, 51));
+
         javax.swing.GroupLayout AdminPanelLayout = new javax.swing.GroupLayout(AdminPanel);
         AdminPanel.setLayout(AdminPanelLayout);
         AdminPanelLayout.setHorizontalGroup(
             AdminPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, AdminPanelLayout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(ButtonAddHosp)
-                .addGap(245, 245, 245))
             .addGroup(AdminPanelLayout.createSequentialGroup()
                 .addGroup(AdminPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(AdminPanelLayout.createSequentialGroup()
@@ -534,7 +672,16 @@ public class MainFrame extends javax.swing.JFrame {
                                     .addComponent(TextHospName, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(TextHospComm, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(TextHospLoc, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE))))))
-                .addContainerGap(48, Short.MAX_VALUE))
+                .addContainerGap(158, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, AdminPanelLayout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addGroup(AdminPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, AdminPanelLayout.createSequentialGroup()
+                        .addComponent(errorAdmin)
+                        .addGap(520, 520, 520))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, AdminPanelLayout.createSequentialGroup()
+                        .addComponent(ButtonAddHosp)
+                        .addGap(244, 244, 244))))
         );
         AdminPanelLayout.setVerticalGroup(
             AdminPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -561,8 +708,10 @@ public class MainFrame extends javax.swing.JFrame {
                             .addComponent(TextHospComm, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel2))))
                 .addGap(18, 18, 18)
+                .addComponent(errorAdmin)
+                .addGap(36, 36, 36)
                 .addComponent(ButtonAddHosp)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 78, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 211, Short.MAX_VALUE)
                 .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 213, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(55, 55, 55))
         );
@@ -587,10 +736,10 @@ public class MainFrame extends javax.swing.JFrame {
 
     private void searchButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchButtonActionPerformed
         // TODO add your handling code here:
-        if(locationTextField.getText().isEmpty() || locationTextField.getText() == null)
-        {
-        JOptionPane.showMessageDialog(this, "Please enter a location!!!");
-        }
+       
+        String location = locationTextField.getText();
+       
+        
     }//GEN-LAST:event_searchButtonActionPerformed
 
     private void patientIdFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_patientIdFieldActionPerformed
@@ -600,6 +749,142 @@ public class MainFrame extends javax.swing.JFrame {
     private void newPatientViewButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_newPatientViewButtonActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_newPatientViewButtonActionPerformed
+
+    private void locationTextFieldFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_locationTextFieldFocusLost
+        // TODO add your handling code here:
+        if(!locationTextField.getText().matches("[a-zA-Z]+") || locationTextField.getText().isEmpty()){
+        error.setText("Please check the entered value");
+        }
+    }//GEN-LAST:event_locationTextFieldFocusLost
+
+    private void patientIdFieldFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_patientIdFieldFocusLost
+        // TODO add your handling code here:
+        if(!patientIdField.getText().matches("^[0-9]*$") || patientIdField.getText().length()!=2){
+        newPatientError.setText("Please check the entered value");}
+    }//GEN-LAST:event_patientIdFieldFocusLost
+
+    private void patientNameFieldFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_patientNameFieldFocusLost
+        // TODO add your handling code here:
+        if(!patientNameField.getText().matches("[a-zA-Z]+") || patientNameField.getText().isEmpty()){
+        newPatientError.setText("Please check the entered value");}
+    }//GEN-LAST:event_patientNameFieldFocusLost
+
+    private void patientDobFieldFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_patientDobFieldFocusLost
+        // TODO add your handling code here:
+        if(patientDobField.getDate().toString().isEmpty()){
+        newPatientError.setText("Please check the entered value");
+        }
+    }//GEN-LAST:event_patientDobFieldFocusLost
+
+    private void patientContactNoFieldFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_patientContactNoFieldFocusLost
+        // TODO add your handling code here:
+        if(!patientContactNoField.getText().matches("^[0-9]*$") && patientContactNoField.getText().length ()!=10){
+        newPatientError.setText("Please check the entered value");
+        }
+    }//GEN-LAST:event_patientContactNoFieldFocusLost
+
+    private void encounterPatientIdFieldFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_encounterPatientIdFieldFocusLost
+        // TODO add your handling code here:
+        if(!encounterPatientIdField.getText().matches("^[0-9]*$") || encounterPatientIdField.getText().length()!=2){
+        errorEncounter.setText("Please check the entered value");}
+    }//GEN-LAST:event_encounterPatientIdFieldFocusLost
+
+    private void encounterDateFieldFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_encounterDateFieldFocusLost
+        // TODO add your handling code here:
+        if(encounterDateField.getDate().toString().isEmpty()){
+        errorEncounter.setText("Please check the entered value");
+        }
+    }//GEN-LAST:event_encounterDateFieldFocusLost
+
+    private void encounterHeartFieldFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_encounterHeartFieldFocusLost
+        // TODO add your handling code here:
+        if(!encounterHeartField.getText().matches("^[0-9]*$") || encounterHeartField.getText().length()>=3 && encounterHeartField.getText().length()<=2){
+       errorEncounter.setText("Please check the entered value");}
+    }//GEN-LAST:event_encounterHeartFieldFocusLost
+
+    private void EncounterBloodFieldFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_EncounterBloodFieldFocusLost
+        // TODO add your handling code here:
+        if(!EncounterBloodField.getText().matches("^[0-9]*$") || EncounterBloodField.getText().length()!=2){
+        errorEncounter.setText("Please check the entered value");}
+    }//GEN-LAST:event_EncounterBloodFieldFocusLost
+
+    private void encounterTemperatureFieldFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_encounterTemperatureFieldFocusLost
+        // TODO add your handling code here:
+        if(!encounterTemperatureField.getText().matches("^[0-9]*$") || encounterTemperatureField.getText().length()!=2){
+        errorEncounter.setText("Please check the entered value");}
+    }//GEN-LAST:event_encounterTemperatureFieldFocusLost
+
+    private void encounterRespFieldFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_encounterRespFieldFocusLost
+        // TODO add your handling code here:
+        if(!encounterRespField.getText().matches("^[0-9]*$") || encounterRespField.getText().length()!=2){
+        errorEncounter.setText("Please check the entered value");}
+    }//GEN-LAST:event_encounterRespFieldFocusLost
+
+    private void encounterDiagnosisFieldFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_encounterDiagnosisFieldFocusLost
+        // TODO add your handling code here:
+        if(encounterDiagnosisField.getText().isEmpty()){
+        errorEncounter.setText("Please check the entered value");
+        }
+    }//GEN-LAST:event_encounterDiagnosisFieldFocusLost
+
+    private void TextCommunityFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_TextCommunityFocusLost
+        // TODO add your handling code here:
+        if(!TextCommunity.getText().matches("[a-zA-Z]+") || TextCommunity.getText().isEmpty()){
+        errorAdmin.setText("Please check the entered value");
+        }
+    }//GEN-LAST:event_TextCommunityFocusLost
+
+    private void TextHospNameFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_TextHospNameFocusLost
+        // TODO add your handling code here:
+        if(!TextHospName.getText().matches("[a-zA-Z]+") || TextHospName.getText().isEmpty()){
+        errorAdmin.setText("Please check the entered value");}
+    }//GEN-LAST:event_TextHospNameFocusLost
+
+    private void TextHospLocFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_TextHospLocFocusLost
+        // TODO add your handling code here:
+        if(!TextHospLoc.getText().matches("[a-zA-Z]+") || TextHospLoc.getText().isEmpty()){
+        errorAdmin.setText("Please check the entered value");}
+    }//GEN-LAST:event_TextHospLocFocusLost
+
+    private void TextHospCommFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_TextHospCommFocusLost
+        // TODO add your handling code here:
+        if(!TextHospComm.getText().matches("[a-zA-Z]+") || TextHospComm.getText().isEmpty()){
+        errorAdmin.setText("Please check the entered value");}
+    }//GEN-LAST:event_TextHospCommFocusLost
+
+    private void ButtonCommunityActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ButtonCommunityActionPerformed
+        // TODO add your handling code here:
+        Community community1 = new Community(1 , "Toronto");
+        Community community2 = new Community(2 , "Vancouver");
+        CommunityList.add(community1);
+        CommunityList.add(community2);
+        CommunityList.add(new Community(3 , TextCommunity.getText()));
+    }//GEN-LAST:event_ButtonCommunityActionPerformed
+
+    private void ButtonAddHospActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ButtonAddHospActionPerformed
+        // TODO add your handling code here:
+        Hospital hospital1 = new Hospital(1, "Sancheti", "FC Road", CommunityList.get(0));
+        Hospital hospital2 = new Hospital(2, "Ruby", "JMD", CommunityList.get(1));
+        HospitalList.add(hospital1);
+        HospitalList.add(hospital2);
+        
+        HospitalList.add(new Hospital(3, TextHospName.getText() , TextHospLoc.getText(),CommunityList.get(0)));
+    }//GEN-LAST:event_ButtonAddHospActionPerformed
+
+    private void addPatientButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addPatientButtonActionPerformed
+        // TODO add your handling code here:
+        Patient patient = new Patient(1, "Rob" , "22-08-2019" , "7878787878");
+        PatientList.add(1, patient);
+        PatientList.add(new Patient(Integer.parseInt(patientIdField.getText()), patientNameField.getText(),patientDobField.getDateFormatString(),patientContactNoField.getText()));
+    }//GEN-LAST:event_addPatientButtonActionPerformed
+
+    private void addEncounterButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addEncounterButtonActionPerformed
+        // TODO add your handling code here:
+        Encounter encounter1 = new Encounter(1, LocalDate.now(), PatientList.get(0), new VitalSign(1, 76, 65, 77, 98) , "All good!");
+        EncounterList.add(encounter1);
+        EncounterList.add(new Encounter(2, LocalDate.now(), PatientList.get(0), new VitalSign(1, 56, 95, 67, 78), encounterDiagnosisField.getText()));
+       
+    }//GEN-LAST:event_addEncounterButtonActionPerformed
 
     /**
      * @param args the command line arguments
@@ -682,6 +967,9 @@ public class MainFrame extends javax.swing.JFrame {
     private javax.swing.JTextField encounterTemperatureField;
     private javax.swing.JLabel encounterTemperatureLabel;
     private javax.swing.JLabel encounterVitalSignLabel;
+    private javax.swing.JLabel error;
+    private javax.swing.JLabel errorAdmin;
+    private javax.swing.JLabel errorEncounter;
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
@@ -691,6 +979,7 @@ public class MainFrame extends javax.swing.JFrame {
     private javax.swing.JLabel locationLabel;
     private javax.swing.JTextField locationTextField;
     private javax.swing.JButton newEncounterButton;
+    private javax.swing.JLabel newPatientError;
     private javax.swing.JButton newPatientViewButton;
     private javax.swing.JTextField patientContactNoField;
     private javax.swing.JLabel patientContactNoLabel;

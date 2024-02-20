@@ -11,8 +11,8 @@ package models;
 public class VitalSign {
     private Integer vitalsignID;
     private Integer heartRate;
-    private String bloodPressure;
-    private Double temprature;
+    private Integer bloodPressure;
+    private Integer temprature;
     private Integer respiratoryRate;
 
     public Integer getVitalsignID() {
@@ -31,19 +31,19 @@ public class VitalSign {
         this.heartRate = heartRate;
     }
 
-    public String getBloodPressure() {
+    public Integer getBloodPressure() {
         return bloodPressure;
     }
 
-    public void setBloodPressure(String bloodPressure) {
+    public void setBloodPressure(Integer bloodPressure) {
         this.bloodPressure = bloodPressure;
     }
 
-    public Double getTemprature() {
+    public Integer getTemprature() {
         return temprature;
     }
 
-    public void setTemprature(Double temprature) {
+    public void setTemprature(Integer temprature) {
         this.temprature = temprature;
     }
 
@@ -55,7 +55,7 @@ public class VitalSign {
         this.respiratoryRate = respiratoryRate;
     }
 
-    public VitalSign(Integer vitalsignID, Integer heartRate, String bloodPressure, Double temprature, Integer respiratoryRate) {
+    public VitalSign(Integer vitalsignID, Integer heartRate, Integer bloodPressure, Integer temprature, Integer respiratoryRate) {
         this.vitalsignID = vitalsignID;
         this.heartRate = heartRate;
         this.bloodPressure = bloodPressure;
