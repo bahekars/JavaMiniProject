@@ -4,14 +4,24 @@
  */
 package view;
 
+import java.time.LocalDate;
+import java.util.ArrayList;
 import javax.swing.JOptionPane;
+import models.Community;
+import models.Hospital;
+import models.Patient;
+import models.Encounter;
+import models.VitalSign;
 
 /**
  *
  * @author sid
  */
 public class MainFrame extends javax.swing.JFrame {
-
+public ArrayList<Community> CommunityList;
+public ArrayList<Hospital> HospitalList;
+public ArrayList<Patient> PatientList;
+public ArrayList<Encounter> EncounterList;
     /**
      * Creates new form MainFrame
      */
@@ -176,6 +186,10 @@ public class MainFrame extends javax.swing.JFrame {
         PatientPanel.setLayout(PatientPanelLayout);
         PatientPanelLayout.setHorizontalGroup(
             PatientPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, PatientPanelLayout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(error, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(332, 332, 332))
             .addGroup(PatientPanelLayout.createSequentialGroup()
                 .addGroup(PatientPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(PatientPanelLayout.createSequentialGroup()
@@ -187,16 +201,12 @@ public class MainFrame extends javax.swing.JFrame {
                         .addGap(81, 81, 81)
                         .addComponent(locationTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 213, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(PatientPanelLayout.createSequentialGroup()
-                        .addGap(81, 81, 81)
-                        .addComponent(HospitalTable, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(PatientPanelLayout.createSequentialGroup()
                         .addGap(250, 250, 250)
-                        .addComponent(searchButton, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(250, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, PatientPanelLayout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(error, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(332, 332, 332))
+                        .addComponent(searchButton, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(PatientPanelLayout.createSequentialGroup()
+                        .addGap(118, 118, 118)
+                        .addComponent(HospitalTable, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(213, Short.MAX_VALUE))
         );
         PatientPanelLayout.setVerticalGroup(
             PatientPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -211,9 +221,9 @@ public class MainFrame extends javax.swing.JFrame {
                 .addComponent(error, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(28, 28, 28)
                 .addComponent(searchButton)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 207, Short.MAX_VALUE)
+                .addGap(120, 120, 120)
                 .addComponent(HospitalTable, javax.swing.GroupLayout.PREFERRED_SIZE, 242, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(84, 84, 84))
+                .addContainerGap(171, Short.MAX_VALUE))
         );
 
         BottomPanel.add(PatientPanel, "card2");
@@ -311,6 +321,11 @@ public class MainFrame extends javax.swing.JFrame {
         });
 
         addPatientButton.setText("Add New Patient");
+        addPatientButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                addPatientButtonActionPerformed(evt);
+            }
+        });
 
         newPatientError.setForeground(new java.awt.Color(255, 51, 51));
 
@@ -429,6 +444,11 @@ public class MainFrame extends javax.swing.JFrame {
         });
 
         addEncounterButton.setText("Add Encounter");
+        addEncounterButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                addEncounterButtonActionPerformed(evt);
+            }
+        });
 
         errorEncounter.setForeground(new java.awt.Color(255, 51, 51));
 
@@ -572,6 +592,11 @@ public class MainFrame extends javax.swing.JFrame {
         LabelCommunity.setText("Community Name");
 
         ButtonCommunity.setText("Add Community");
+        ButtonCommunity.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ButtonCommunityActionPerformed(evt);
+            }
+        });
 
         LabelHospName.setText("Hospital Name");
 
@@ -598,6 +623,11 @@ public class MainFrame extends javax.swing.JFrame {
         });
 
         ButtonAddHosp.setText("Add Hospital");
+        ButtonAddHosp.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ButtonAddHospActionPerformed(evt);
+            }
+        });
 
         jTable2.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -618,12 +648,6 @@ public class MainFrame extends javax.swing.JFrame {
         AdminPanel.setLayout(AdminPanelLayout);
         AdminPanelLayout.setHorizontalGroup(
             AdminPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, AdminPanelLayout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(errorAdmin)
-                .addGap(169, 169, 169)
-                .addComponent(ButtonAddHosp)
-                .addGap(245, 245, 245))
             .addGroup(AdminPanelLayout.createSequentialGroup()
                 .addGroup(AdminPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(AdminPanelLayout.createSequentialGroup()
@@ -649,6 +673,15 @@ public class MainFrame extends javax.swing.JFrame {
                                     .addComponent(TextHospComm, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(TextHospLoc, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE))))))
                 .addContainerGap(158, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, AdminPanelLayout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addGroup(AdminPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, AdminPanelLayout.createSequentialGroup()
+                        .addComponent(errorAdmin)
+                        .addGap(520, 520, 520))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, AdminPanelLayout.createSequentialGroup()
+                        .addComponent(ButtonAddHosp)
+                        .addGap(244, 244, 244))))
         );
         AdminPanelLayout.setVerticalGroup(
             AdminPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -675,10 +708,10 @@ public class MainFrame extends javax.swing.JFrame {
                             .addComponent(TextHospComm, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel2))))
                 .addGap(18, 18, 18)
-                .addGroup(AdminPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(ButtonAddHosp)
-                    .addComponent(errorAdmin))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 247, Short.MAX_VALUE)
+                .addComponent(errorAdmin)
+                .addGap(36, 36, 36)
+                .addComponent(ButtonAddHosp)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 211, Short.MAX_VALUE)
                 .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 213, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(55, 55, 55))
         );
@@ -703,10 +736,8 @@ public class MainFrame extends javax.swing.JFrame {
 
     private void searchButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchButtonActionPerformed
         // TODO add your handling code here:
-        if(locationTextField.getText().isEmpty() || locationTextField.getText() == null)
-        {
-        error.setText("Please check the entered value");
-        }
+       
+        String location = locationTextField.getText();
        
         
     }//GEN-LAST:event_searchButtonActionPerformed
@@ -820,6 +851,40 @@ public class MainFrame extends javax.swing.JFrame {
         if(!TextHospComm.getText().matches("[a-zA-Z]+") || TextHospComm.getText().isEmpty()){
         errorAdmin.setText("Please check the entered value");}
     }//GEN-LAST:event_TextHospCommFocusLost
+
+    private void ButtonCommunityActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ButtonCommunityActionPerformed
+        // TODO add your handling code here:
+        Community community1 = new Community(1 , "Toronto");
+        Community community2 = new Community(2 , "Vancouver");
+        CommunityList.add(community1);
+        CommunityList.add(community2);
+        CommunityList.add(new Community(3 , TextCommunity.getText()));
+    }//GEN-LAST:event_ButtonCommunityActionPerformed
+
+    private void ButtonAddHospActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ButtonAddHospActionPerformed
+        // TODO add your handling code here:
+        Hospital hospital1 = new Hospital(1, "Sancheti", "FC Road", CommunityList.get(0));
+        Hospital hospital2 = new Hospital(2, "Ruby", "JMD", CommunityList.get(1));
+        HospitalList.add(hospital1);
+        HospitalList.add(hospital2);
+        
+        HospitalList.add(new Hospital(3, TextHospName.getText() , TextHospLoc.getText(),CommunityList.get(0)));
+    }//GEN-LAST:event_ButtonAddHospActionPerformed
+
+    private void addPatientButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addPatientButtonActionPerformed
+        // TODO add your handling code here:
+        Patient patient = new Patient(1, "Rob" , "22-08-2019" , "7878787878");
+        PatientList.add(1, patient);
+        PatientList.add(new Patient(Integer.parseInt(patientIdField.getText()), patientNameField.getText(),patientDobField.getDateFormatString(),patientContactNoField.getText()));
+    }//GEN-LAST:event_addPatientButtonActionPerformed
+
+    private void addEncounterButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addEncounterButtonActionPerformed
+        // TODO add your handling code here:
+        Encounter encounter1 = new Encounter(1, LocalDate.now(), PatientList.get(0), new VitalSign(1, 76, 65, 77, 98) , "All good!");
+        EncounterList.add(encounter1);
+        EncounterList.add(new Encounter(2, LocalDate.now(), PatientList.get(0), new VitalSign(1, 56, 95, 67, 78), encounterDiagnosisField.getText()));
+       
+    }//GEN-LAST:event_addEncounterButtonActionPerformed
 
     /**
      * @param args the command line arguments
