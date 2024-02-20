@@ -14,7 +14,7 @@ import java.time.LocalDate;
 public class Patient {
     private Integer patientID;
     private String name;
-    private LocalDate dob;
+    private String dob;
     private String contactNumber;
     private String userName;
     private String password;
@@ -35,11 +35,11 @@ public class Patient {
         this.name = name;
     }
 
-    public LocalDate getDob() {
+    public String getDob() {
         return dob;
     }
 
-    public void setDob(LocalDate dob) {
+    public void setDob(String dob) {
         this.dob = dob;
     }
 
@@ -67,13 +67,12 @@ public class Patient {
         this.password = password;
     }
 
-    public Patient(Integer patientID, String name, LocalDate dob, String contactNumber, String userName, String password) {
+    public Patient(Integer patientID, String name, String dob, String contactNumber) {
         this.patientID = patientID;
         this.name = name;
         this.dob = dob;
         this.contactNumber = contactNumber;
-        this.userName = userName;
-        this.password = password;
+        
     }
 
     public Patient() {

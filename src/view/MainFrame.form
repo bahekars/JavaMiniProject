@@ -62,9 +62,9 @@
                       <Component id="PatientView" min="-2" pref="106" max="-2" attributes="0"/>
                       <EmptySpace min="-2" pref="117" max="-2" attributes="0"/>
                       <Component id="DoctorView" min="-2" pref="103" max="-2" attributes="0"/>
-                      <EmptySpace pref="153" max="32767" attributes="0"/>
+                      <EmptySpace min="-2" pref="149" max="-2" attributes="0"/>
                       <Component id="AdminView" min="-2" pref="99" max="-2" attributes="0"/>
-                      <EmptySpace min="-2" pref="59" max="-2" attributes="0"/>
+                      <EmptySpace pref="173" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -119,6 +119,11 @@
               <Layout>
                 <DimensionLayout dim="0">
                   <Group type="103" groupAlignment="0" attributes="0">
+                      <Group type="102" alignment="1" attributes="0">
+                          <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                          <Component id="error" min="-2" pref="67" max="-2" attributes="0"/>
+                          <EmptySpace min="-2" pref="332" max="-2" attributes="0"/>
+                      </Group>
                       <Group type="102" attributes="0">
                           <Group type="103" groupAlignment="0" attributes="0">
                               <Group type="102" attributes="0">
@@ -132,15 +137,15 @@
                                   <Component id="locationTextField" min="-2" pref="213" max="-2" attributes="0"/>
                               </Group>
                               <Group type="102" alignment="0" attributes="0">
-                                  <EmptySpace min="-2" pref="251" max="-2" attributes="0"/>
+                                  <EmptySpace min="-2" pref="250" max="-2" attributes="0"/>
                                   <Component id="searchButton" min="-2" pref="101" max="-2" attributes="0"/>
                               </Group>
                               <Group type="102" alignment="0" attributes="0">
-                                  <EmptySpace min="-2" pref="81" max="-2" attributes="0"/>
+                                  <EmptySpace min="-2" pref="118" max="-2" attributes="0"/>
                                   <Component id="HospitalTable" min="-2" max="-2" attributes="0"/>
                               </Group>
                           </Group>
-                          <EmptySpace pref="140" max="32767" attributes="0"/>
+                          <EmptySpace pref="213" max="32767" attributes="0"/>
                       </Group>
                   </Group>
                 </DimensionLayout>
@@ -155,10 +160,12 @@
                               <Component id="locationTextField" alignment="3" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace type="separate" max="-2" attributes="0"/>
+                          <Component id="error" min="-2" pref="21" max="-2" attributes="0"/>
+                          <EmptySpace min="-2" pref="28" max="-2" attributes="0"/>
                           <Component id="searchButton" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace pref="87" max="32767" attributes="0"/>
+                          <EmptySpace min="-2" pref="120" max="-2" attributes="0"/>
                           <Component id="HospitalTable" min="-2" pref="242" max="-2" attributes="0"/>
-                          <EmptySpace min="-2" pref="84" max="-2" attributes="0"/>
+                          <EmptySpace pref="171" max="32767" attributes="0"/>
                       </Group>
                   </Group>
                 </DimensionLayout>
@@ -182,10 +189,11 @@
                     <Component class="javax.swing.JTable" name="HospitalDetails">
                       <Properties>
                         <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
-                          <Table columnCount="3" rowCount="4">
+                          <Table columnCount="4" rowCount="4">
                             <Column editable="true" title="Name" type="java.lang.Object"/>
                             <Column editable="true" title="Location" type="java.lang.Object"/>
                             <Column editable="true" title="Community" type="java.lang.Object"/>
+                            <Column editable="true" title="Doctor" type="java.lang.Object"/>
                           </Table>
                         </Property>
                       </Properties>
@@ -198,6 +206,9 @@
                   </Properties>
                 </Component>
                 <Component class="javax.swing.JTextField" name="locationTextField">
+                  <Events>
+                    <EventHandler event="focusLost" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="locationTextFieldFocusLost"/>
+                  </Events>
                 </Component>
                 <Component class="javax.swing.JButton" name="searchButton">
                   <Properties>
@@ -206,6 +217,13 @@
                   <Events>
                     <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="searchButtonActionPerformed"/>
                   </Events>
+                </Component>
+                <Component class="javax.swing.JLabel" name="error">
+                  <Properties>
+                    <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                      <Color blue="33" green="33" red="ff" type="rgb"/>
+                    </Property>
+                  </Properties>
                 </Component>
               </SubComponents>
             </Container>
@@ -254,25 +272,21 @@
                           <Group type="103" groupAlignment="0" attributes="0">
                               <Group type="102" attributes="0">
                                   <Group type="103" groupAlignment="0" attributes="0">
-                                      <Group type="102" attributes="0">
-                                          <EmptySpace min="-2" pref="78" max="-2" attributes="0"/>
-                                          <Component id="newPatientViewButton" min="-2" max="-2" attributes="0"/>
+                                      <Group type="102" alignment="0" attributes="0">
+                                          <EmptySpace min="-2" pref="289" max="-2" attributes="0"/>
+                                          <Component id="LabelDoctor" min="-2" max="-2" attributes="0"/>
                                           <EmptySpace max="32767" attributes="0"/>
-                                          <Component id="viewPatientButton" min="-2" max="-2" attributes="0"/>
-                                          <EmptySpace min="52" pref="52" max="-2" attributes="0"/>
                                       </Group>
                                       <Group type="102" alignment="0" attributes="0">
-                                          <Group type="103" groupAlignment="1" attributes="0">
-                                              <Component id="newEncounterButton" min="-2" max="-2" attributes="0"/>
-                                              <Group type="102" attributes="0">
-                                                  <EmptySpace min="-2" pref="289" max="-2" attributes="0"/>
-                                                  <Component id="LabelDoctor" min="-2" max="-2" attributes="0"/>
-                                              </Group>
-                                          </Group>
-                                          <EmptySpace min="0" pref="290" max="32767" attributes="0"/>
+                                          <EmptySpace min="-2" pref="78" max="-2" attributes="0"/>
+                                          <Component id="newPatientViewButton" min="-2" max="-2" attributes="0"/>
+                                          <EmptySpace pref="75" max="32767" attributes="0"/>
+                                          <Component id="newEncounterButton" min="-2" max="-2" attributes="0"/>
+                                          <EmptySpace min="-2" pref="66" max="-2" attributes="0"/>
                                       </Group>
                                   </Group>
-                                  <EmptySpace max="-2" attributes="0"/>
+                                  <Component id="viewPatientButton" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace min="-2" pref="148" max="-2" attributes="0"/>
                               </Group>
                           </Group>
                         </DimensionLayout>
@@ -287,7 +301,7 @@
                                       <Component id="newEncounterButton" alignment="3" min="-2" max="-2" attributes="0"/>
                                       <Component id="viewPatientButton" alignment="3" min="-2" max="-2" attributes="0"/>
                                   </Group>
-                                  <EmptySpace pref="32" max="32767" attributes="0"/>
+                                  <EmptySpace pref="231" max="32767" attributes="0"/>
                               </Group>
                           </Group>
                         </DimensionLayout>
@@ -356,14 +370,15 @@
                                                   <Component id="patientNameField" alignment="0" min="-2" pref="128" max="-2" attributes="0"/>
                                                   <Component id="patientDobField" min="-2" max="-2" attributes="0"/>
                                                   <Component id="patientContactNoField" alignment="0" min="-2" pref="115" max="-2" attributes="0"/>
+                                                  <Component id="newPatientError" alignment="0" min="-2" max="-2" attributes="0"/>
                                               </Group>
                                           </Group>
                                           <Group type="102" alignment="0" attributes="0">
-                                              <EmptySpace min="-2" pref="243" max="-2" attributes="0"/>
+                                              <EmptySpace min="-2" pref="242" max="-2" attributes="0"/>
                                               <Component id="addPatientButton" min="-2" max="-2" attributes="0"/>
                                           </Group>
                                       </Group>
-                                      <EmptySpace pref="285" max="32767" attributes="0"/>
+                                      <EmptySpace pref="369" max="32767" attributes="0"/>
                                   </Group>
                               </Group>
                             </DimensionLayout>
@@ -390,9 +405,11 @@
                                           <Component id="patientContactNoLabel" alignment="3" min="-2" max="-2" attributes="0"/>
                                           <Component id="patientContactNoField" alignment="3" min="-2" max="-2" attributes="0"/>
                                       </Group>
-                                      <EmptySpace max="32767" attributes="0"/>
+                                      <EmptySpace min="-2" pref="49" max="-2" attributes="0"/>
+                                      <Component id="newPatientError" min="-2" max="-2" attributes="0"/>
+                                      <EmptySpace type="separate" max="-2" attributes="0"/>
                                       <Component id="addPatientButton" min="-2" max="-2" attributes="0"/>
-                                      <EmptySpace min="-2" pref="39" max="-2" attributes="0"/>
+                                      <EmptySpace pref="61" max="32767" attributes="0"/>
                                   </Group>
                               </Group>
                             </DimensionLayout>
@@ -419,19 +436,39 @@
                               </Properties>
                             </Component>
                             <Component class="javax.swing.JTextField" name="patientNameField">
+                              <Events>
+                                <EventHandler event="focusLost" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="patientNameFieldFocusLost"/>
+                              </Events>
                             </Component>
                             <Component class="javax.swing.JTextField" name="patientIdField">
                               <Events>
+                                <EventHandler event="focusLost" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="patientIdFieldFocusLost"/>
                                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="patientIdFieldActionPerformed"/>
                               </Events>
                             </Component>
                             <Component class="javax.swing.JTextField" name="patientContactNoField">
+                              <Events>
+                                <EventHandler event="focusLost" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="patientContactNoFieldFocusLost"/>
+                              </Events>
                             </Component>
                             <Component class="com.toedter.calendar.JDateChooser" name="patientDobField">
+                              <Events>
+                                <EventHandler event="focusLost" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="patientDobFieldFocusLost"/>
+                              </Events>
                             </Component>
                             <Component class="javax.swing.JButton" name="addPatientButton">
                               <Properties>
                                 <Property name="text" type="java.lang.String" value="Add New Patient"/>
+                              </Properties>
+                              <Events>
+                                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="addPatientButtonActionPerformed"/>
+                              </Events>
+                            </Component>
+                            <Component class="javax.swing.JLabel" name="newPatientError">
+                              <Properties>
+                                <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                                  <Color blue="33" green="33" red="ff" type="rgb"/>
+                                </Property>
                               </Properties>
                             </Component>
                           </SubComponents>
@@ -491,7 +528,11 @@
                                                   <Component id="encounterTemperatureField" min="-2" pref="71" max="-2" attributes="0"/>
                                                   <Component id="EncounterBloodField" alignment="0" min="-2" pref="71" max="-2" attributes="0"/>
                                                   <Component id="encounterRespField" alignment="0" min="-2" pref="71" max="-2" attributes="0"/>
-                                                  <Component id="encounterHeartField" min="-2" pref="71" max="-2" attributes="0"/>
+                                                  <Group type="102" alignment="0" attributes="0">
+                                                      <Component id="encounterHeartField" min="-2" pref="71" max="-2" attributes="0"/>
+                                                      <EmptySpace pref="248" max="32767" attributes="0"/>
+                                                      <Component id="errorEncounter" min="-2" pref="63" max="-2" attributes="0"/>
+                                                  </Group>
                                               </Group>
                                           </Group>
                                           <Group type="102" alignment="0" attributes="0">
@@ -499,7 +540,7 @@
                                               <Component id="addEncounterButton" min="-2" max="-2" attributes="0"/>
                                           </Group>
                                       </Group>
-                                      <EmptySpace pref="221" max="32767" attributes="0"/>
+                                      <EmptySpace min="-2" pref="123" max="-2" attributes="0"/>
                                   </Group>
                               </Group>
                             </DimensionLayout>
@@ -518,10 +559,18 @@
                                       </Group>
                                       <EmptySpace min="-2" pref="26" max="-2" attributes="0"/>
                                       <Component id="encounterVitalSignLabel" min="-2" max="-2" attributes="0"/>
-                                      <EmptySpace min="-2" pref="27" max="-2" attributes="0"/>
-                                      <Group type="103" groupAlignment="3" attributes="0">
-                                          <Component id="encounterHeartRateLabel" alignment="3" min="-2" max="-2" attributes="0"/>
-                                          <Component id="encounterHeartField" alignment="3" min="-2" max="-2" attributes="0"/>
+                                      <Group type="103" groupAlignment="0" attributes="0">
+                                          <Group type="102" attributes="0">
+                                              <EmptySpace min="-2" pref="27" max="-2" attributes="0"/>
+                                              <Group type="103" groupAlignment="3" attributes="0">
+                                                  <Component id="encounterHeartRateLabel" alignment="3" min="-2" max="-2" attributes="0"/>
+                                                  <Component id="encounterHeartField" alignment="3" min="-2" max="-2" attributes="0"/>
+                                              </Group>
+                                          </Group>
+                                          <Group type="102" alignment="1" attributes="0">
+                                              <EmptySpace min="-2" pref="14" max="-2" attributes="0"/>
+                                              <Component id="errorEncounter" min="-2" pref="36" max="-2" attributes="0"/>
+                                          </Group>
                                       </Group>
                                       <EmptySpace type="separate" max="-2" attributes="0"/>
                                       <Group type="103" groupAlignment="3" attributes="0">
@@ -543,9 +592,8 @@
                                           <Component id="diagnosisLabel" min="-2" max="-2" attributes="0"/>
                                           <Component id="jScrollPane1" min="-2" pref="54" max="-2" attributes="0"/>
                                       </Group>
-                                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                                      <EmptySpace min="-2" pref="32" max="-2" attributes="0"/>
                                       <Component id="addEncounterButton" min="-2" max="-2" attributes="0"/>
-                                      <EmptySpace min="-2" pref="14" max="-2" attributes="0"/>
                                   </Group>
                               </Group>
                             </DimensionLayout>
@@ -567,9 +615,9 @@
                               </Properties>
                             </Component>
                             <Component class="javax.swing.JTextField" name="encounterHeartField">
-                              <Properties>
-                                <Property name="text" type="java.lang.String" value="jTextField1"/>
-                              </Properties>
+                              <Events>
+                                <EventHandler event="focusLost" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="encounterHeartFieldFocusLost"/>
+                              </Events>
                             </Component>
                             <Component class="javax.swing.JLabel" name="encounterHeartRateLabel">
                               <Properties>
@@ -597,21 +645,24 @@
                               </Properties>
                             </Component>
                             <Component class="javax.swing.JTextField" name="encounterPatientIdField">
+                              <Events>
+                                <EventHandler event="focusLost" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="encounterPatientIdFieldFocusLost"/>
+                              </Events>
                             </Component>
                             <Component class="javax.swing.JTextField" name="EncounterBloodField">
-                              <Properties>
-                                <Property name="text" type="java.lang.String" value="jTextField1"/>
-                              </Properties>
+                              <Events>
+                                <EventHandler event="focusLost" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="EncounterBloodFieldFocusLost"/>
+                              </Events>
                             </Component>
                             <Component class="javax.swing.JTextField" name="encounterTemperatureField">
-                              <Properties>
-                                <Property name="text" type="java.lang.String" value="jTextField1"/>
-                              </Properties>
+                              <Events>
+                                <EventHandler event="focusLost" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="encounterTemperatureFieldFocusLost"/>
+                              </Events>
                             </Component>
                             <Component class="javax.swing.JTextField" name="encounterRespField">
-                              <Properties>
-                                <Property name="text" type="java.lang.String" value="jTextField1"/>
-                              </Properties>
+                              <Events>
+                                <EventHandler event="focusLost" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="encounterRespFieldFocusLost"/>
+                              </Events>
                             </Component>
                             <Container class="javax.swing.JScrollPane" name="jScrollPane1">
                               <AuxValues>
@@ -625,14 +676,30 @@
                                     <Property name="columns" type="int" value="20"/>
                                     <Property name="rows" type="int" value="5"/>
                                   </Properties>
+                                  <Events>
+                                    <EventHandler event="focusLost" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="encounterDiagnosisFieldFocusLost"/>
+                                  </Events>
                                 </Component>
                               </SubComponents>
                             </Container>
                             <Component class="com.toedter.calendar.JDateChooser" name="encounterDateField">
+                              <Events>
+                                <EventHandler event="focusLost" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="encounterDateFieldFocusLost"/>
+                              </Events>
                             </Component>
                             <Component class="javax.swing.JButton" name="addEncounterButton">
                               <Properties>
                                 <Property name="text" type="java.lang.String" value="Add Encounter"/>
+                              </Properties>
+                              <Events>
+                                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="addEncounterButtonActionPerformed"/>
+                              </Events>
+                            </Component>
+                            <Component class="javax.swing.JLabel" name="errorEncounter">
+                              <Properties>
+                                <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                                  <Color blue="33" green="33" red="ff" type="rgb"/>
+                                </Property>
                               </Properties>
                             </Component>
                           </SubComponents>
@@ -650,7 +717,7 @@
                                   <Group type="102" alignment="0" attributes="0">
                                       <EmptySpace min="-2" pref="61" max="-2" attributes="0"/>
                                       <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
-                                      <EmptySpace pref="597" max="32767" attributes="0"/>
+                                      <EmptySpace pref="684" max="32767" attributes="0"/>
                                   </Group>
                               </Group>
                             </DimensionLayout>
@@ -659,7 +726,7 @@
                                   <Group type="102" alignment="0" attributes="0">
                                       <EmptySpace min="-2" pref="163" max="-2" attributes="0"/>
                                       <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
-                                      <EmptySpace pref="238" max="32767" attributes="0"/>
+                                      <EmptySpace pref="244" max="32767" attributes="0"/>
                                   </Group>
                               </Group>
                             </DimensionLayout>
@@ -688,11 +755,6 @@
               <Layout>
                 <DimensionLayout dim="0">
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Group type="102" alignment="1" attributes="0">
-                          <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
-                          <Component id="ButtonAddHosp" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace min="-2" pref="245" max="-2" attributes="0"/>
-                      </Group>
                       <Group type="102" attributes="0">
                           <Group type="103" groupAlignment="0" attributes="0">
                               <Group type="102" attributes="0">
@@ -725,7 +787,20 @@
                                   </Group>
                               </Group>
                           </Group>
-                          <EmptySpace pref="48" max="32767" attributes="0"/>
+                          <EmptySpace pref="158" max="32767" attributes="0"/>
+                      </Group>
+                      <Group type="102" alignment="1" attributes="0">
+                          <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Group type="102" alignment="1" attributes="0">
+                                  <Component id="errorAdmin" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace min="-2" pref="520" max="-2" attributes="0"/>
+                              </Group>
+                              <Group type="102" alignment="1" attributes="0">
+                                  <Component id="ButtonAddHosp" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace min="-2" pref="244" max="-2" attributes="0"/>
+                              </Group>
+                          </Group>
                       </Group>
                   </Group>
                 </DimensionLayout>
@@ -760,8 +835,10 @@
                               </Group>
                           </Group>
                           <EmptySpace type="separate" max="-2" attributes="0"/>
+                          <Component id="errorAdmin" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace min="-2" pref="36" max="-2" attributes="0"/>
                           <Component id="ButtonAddHosp" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace pref="78" max="32767" attributes="0"/>
+                          <EmptySpace pref="211" max="32767" attributes="0"/>
                           <Component id="jScrollPane3" min="-2" pref="213" max="-2" attributes="0"/>
                           <EmptySpace min="-2" pref="55" max="-2" attributes="0"/>
                       </Group>
@@ -778,6 +855,9 @@
                   </Properties>
                 </Component>
                 <Component class="javax.swing.JTextField" name="TextCommunity">
+                  <Events>
+                    <EventHandler event="focusLost" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="TextCommunityFocusLost"/>
+                  </Events>
                 </Component>
                 <Component class="javax.swing.JLabel" name="LabelCommunity">
                   <Properties>
@@ -788,6 +868,9 @@
                   <Properties>
                     <Property name="text" type="java.lang.String" value="Add Community"/>
                   </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="ButtonCommunityActionPerformed"/>
+                  </Events>
                 </Component>
                 <Component class="javax.swing.JLabel" name="LabelHospName">
                   <Properties>
@@ -795,6 +878,9 @@
                   </Properties>
                 </Component>
                 <Component class="javax.swing.JTextField" name="TextHospName">
+                  <Events>
+                    <EventHandler event="focusLost" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="TextHospNameFocusLost"/>
+                  </Events>
                 </Component>
                 <Component class="javax.swing.JLabel" name="LabelHospLoc">
                   <Properties>
@@ -802,6 +888,9 @@
                   </Properties>
                 </Component>
                 <Component class="javax.swing.JTextField" name="TextHospLoc">
+                  <Events>
+                    <EventHandler event="focusLost" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="TextHospLocFocusLost"/>
+                  </Events>
                 </Component>
                 <Component class="javax.swing.JLabel" name="jLabel2">
                   <Properties>
@@ -809,11 +898,17 @@
                   </Properties>
                 </Component>
                 <Component class="javax.swing.JTextField" name="TextHospComm">
+                  <Events>
+                    <EventHandler event="focusLost" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="TextHospCommFocusLost"/>
+                  </Events>
                 </Component>
                 <Component class="javax.swing.JButton" name="ButtonAddHosp">
                   <Properties>
                     <Property name="text" type="java.lang.String" value="Add Hospital"/>
                   </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="ButtonAddHospActionPerformed"/>
+                  </Events>
                 </Component>
                 <Container class="javax.swing.JScrollPane" name="jScrollPane3">
                   <AuxValues>
@@ -836,6 +931,13 @@
                     </Component>
                   </SubComponents>
                 </Container>
+                <Component class="javax.swing.JLabel" name="errorAdmin">
+                  <Properties>
+                    <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                      <Color blue="33" green="33" red="ff" type="rgb"/>
+                    </Property>
+                  </Properties>
+                </Component>
               </SubComponents>
             </Container>
           </SubComponents>
