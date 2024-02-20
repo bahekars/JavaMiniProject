@@ -14,6 +14,7 @@ public class Encounter {
     private Integer encounterID;
     private LocalDate date;
     private Doctor doctor;
+    private Patient patient;
     private VitalSign vitalSign;
     private String diagnosis;
 
