@@ -4,6 +4,7 @@
  */
 package view;
 
+import java.awt.CardLayout;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import javax.swing.DefaultComboBoxModel;
@@ -91,9 +92,6 @@ public ArrayList<String> locations = new ArrayList<>();
         newEncounterButton = new javax.swing.JButton();
         viewPatientButton = new javax.swing.JButton();
         DocBotPanel = new javax.swing.JPanel();
-        viewPatientPanel = new javax.swing.JPanel();
-        jScrollPane2 = new javax.swing.JScrollPane();
-        viewPatientsTable = new javax.swing.JTable();
         addPatientPanel = new javax.swing.JPanel();
         patientNameLabel = new javax.swing.JLabel();
         patientDobLabel = new javax.swing.JLabel();
@@ -105,6 +103,9 @@ public ArrayList<String> locations = new ArrayList<>();
         patientDobField = new com.toedter.calendar.JDateChooser();
         addPatientButton = new javax.swing.JButton();
         newPatientError = new javax.swing.JLabel();
+        viewPatientPanel = new javax.swing.JPanel();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        viewPatientsTable = new javax.swing.JTable();
         addEncounterPanel = new javax.swing.JPanel();
         encounterDateLabel = new javax.swing.JLabel();
         encounterVitalSignLabel = new javax.swing.JLabel();
@@ -206,6 +207,11 @@ public ArrayList<String> locations = new ArrayList<>();
         newEncounterButton.setText("Add new Encounter");
 
         viewPatientButton.setText("View Patient Details");
+        viewPatientButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                viewPatientButtonActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout DocTopPanelLayout = new javax.swing.GroupLayout(DocTopPanel);
         DocTopPanel.setLayout(DocTopPanelLayout);
@@ -242,41 +248,6 @@ public ArrayList<String> locations = new ArrayList<>();
         DocSplitPane.setTopComponent(DocTopPanel);
 
         DocBotPanel.setLayout(new java.awt.CardLayout());
-
-        viewPatientPanel.addFocusListener(new java.awt.event.FocusAdapter() {
-            public void focusGained(java.awt.event.FocusEvent evt) {
-                viewPatientPanelFocusGained(evt);
-            }
-        });
-
-        viewPatientsTable.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-
-            },
-            new String [] {
-                "Id", "Name", "Date Of Birth", "Contact No", "Update", "Delete"
-            }
-        ));
-        jScrollPane2.setViewportView(viewPatientsTable);
-
-        javax.swing.GroupLayout viewPatientPanelLayout = new javax.swing.GroupLayout(viewPatientPanel);
-        viewPatientPanel.setLayout(viewPatientPanelLayout);
-        viewPatientPanelLayout.setHorizontalGroup(
-            viewPatientPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(viewPatientPanelLayout.createSequentialGroup()
-                .addGap(35, 35, 35)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 519, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(225, Short.MAX_VALUE))
-        );
-        viewPatientPanelLayout.setVerticalGroup(
-            viewPatientPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(viewPatientPanelLayout.createSequentialGroup()
-                .addGap(57, 57, 57)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 297, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(85, Short.MAX_VALUE))
-        );
-
-        DocBotPanel.add(viewPatientPanel, "card4");
 
         patientNameLabel.setText("Name");
 
@@ -376,6 +347,41 @@ public ArrayList<String> locations = new ArrayList<>();
         );
 
         DocBotPanel.add(addPatientPanel, "card2");
+
+        viewPatientPanel.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                viewPatientPanelFocusGained(evt);
+            }
+        });
+
+        viewPatientsTable.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Id", "Name", "Date Of Birth", "Contact No", "Update", "Delete"
+            }
+        ));
+        jScrollPane2.setViewportView(viewPatientsTable);
+
+        javax.swing.GroupLayout viewPatientPanelLayout = new javax.swing.GroupLayout(viewPatientPanel);
+        viewPatientPanel.setLayout(viewPatientPanelLayout);
+        viewPatientPanelLayout.setHorizontalGroup(
+            viewPatientPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(viewPatientPanelLayout.createSequentialGroup()
+                .addGap(35, 35, 35)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 519, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(225, Short.MAX_VALUE))
+        );
+        viewPatientPanelLayout.setVerticalGroup(
+            viewPatientPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(viewPatientPanelLayout.createSequentialGroup()
+                .addGap(57, 57, 57)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 297, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(85, Short.MAX_VALUE))
+        );
+
+        DocBotPanel.add(viewPatientPanel, "card4");
 
         encounterDateLabel.setText("Date:");
 
@@ -971,6 +977,13 @@ public ArrayList<String> locations = new ArrayList<>();
         // TODO add your handling code here:
      
     }//GEN-LAST:event_viewPatientPanelFocusGained
+
+    private void viewPatientButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_viewPatientButtonActionPerformed
+        // TODO add your handling code here:
+        DocBotPanel.add(addPatientPanel);
+        CardLayout layout = (CardLayout) addPatientPanel.getLayout();
+            layout.next(addPatientPanel);
+    }//GEN-LAST:event_viewPatientButtonActionPerformed
 
     /**
      * @param args the command line arguments
