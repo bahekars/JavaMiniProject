@@ -4,6 +4,10 @@
  */
 package models;
 
+import java.util.ArrayList;
+import java.util.List;
+
+
 /**
  *
  * @author sid
@@ -11,8 +15,23 @@ package models;
 public class Community {
     private Integer communityID;
     private String name;
+    
+    public List<String> getList()
+    {
+        List<String> commName = new ArrayList<String>();
+        commName.add(("Toronto"));
+        commName.add(("Vancouver"));
+        return commName;
+    }
 
     public Community() {
+
+        
+    }
+
+        public Community( String name) {
+        
+        this.name = name;
     }
 
     public Community(Integer communityID, String name) {
@@ -29,7 +48,7 @@ public class Community {
     }
 
     public void setCommunityID(Integer communityID) {
-        this.communityID = communityID;
+       this.communityID = communityID;
     }
 
     public void setName(String name) {
@@ -41,6 +60,7 @@ public class Community {
         return super.toString(); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/OverriddenMethodBody
     }
     
-    
+
+
     
 }
