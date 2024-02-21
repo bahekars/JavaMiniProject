@@ -135,6 +135,8 @@
                                   <Component id="locationLabel" min="-2" max="-2" attributes="0"/>
                                   <EmptySpace min="-2" pref="81" max="-2" attributes="0"/>
                                   <Component id="locationTextField" min="-2" pref="213" max="-2" attributes="0"/>
+                                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                                  <Component id="comboHospLoc" min="-2" max="-2" attributes="0"/>
                               </Group>
                               <Group type="102" alignment="0" attributes="0">
                                   <EmptySpace min="-2" pref="250" max="-2" attributes="0"/>
@@ -145,7 +147,7 @@
                                   <Component id="HospitalTable" min="-2" max="-2" attributes="0"/>
                               </Group>
                           </Group>
-                          <EmptySpace pref="213" max="32767" attributes="0"/>
+                          <EmptySpace pref="189" max="32767" attributes="0"/>
                       </Group>
                   </Group>
                 </DimensionLayout>
@@ -158,6 +160,7 @@
                           <Group type="103" groupAlignment="3" attributes="0">
                               <Component id="locationLabel" alignment="3" min="-2" max="-2" attributes="0"/>
                               <Component id="locationTextField" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="comboHospLoc" alignment="3" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace type="separate" max="-2" attributes="0"/>
                           <Component id="error" min="-2" pref="21" max="-2" attributes="0"/>
@@ -224,6 +227,16 @@
                       <Color blue="33" green="33" red="ff" type="rgb"/>
                     </Property>
                   </Properties>
+                </Component>
+                <Component class="javax.swing.JComboBox" name="comboHospLoc">
+                  <Properties>
+                    <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
+                      <StringArray count="0"/>
+                    </Property>
+                  </Properties>
+                  <AuxValues>
+                    <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
+                  </AuxValues>
                 </Component>
               </SubComponents>
             </Container>

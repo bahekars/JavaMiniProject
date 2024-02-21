@@ -6,6 +6,8 @@ package view;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
+import javax.swing.DefaultComboBoxModel;
+import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
 import models.Community;
 import models.Hospital;
@@ -22,12 +24,25 @@ public ArrayList<Community> CommunityList;
 public ArrayList<Hospital> HospitalList;
 public ArrayList<Patient> PatientList;
 public ArrayList<Encounter> EncounterList;
+
+public Community comm = new Community();
+public ArrayList<String> locations = new ArrayList<>();
+    
     /**
      * Creates new form MainFrame
      */
     public MainFrame() {
         initComponents();
-    }
+        
+        //loadData();
+        locations = (ArrayList)comm.getList();
+          //add combobox default values here
+        DefaultComboBoxModel model = new DefaultComboBoxModel();
+        //model.addElement("Toronto");
+        //model.addElement("Vancouver");
+        model.addAll(locations);
+        comboHospLoc.setModel(model);
+      }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -53,6 +68,7 @@ public ArrayList<Encounter> EncounterList;
         locationTextField = new javax.swing.JTextField();
         searchButton = new javax.swing.JButton();
         error = new javax.swing.JLabel();
+        comboHospLoc = new javax.swing.JComboBox<>();
         DoctorPanel = new javax.swing.JPanel();
         DocSplitPane = new javax.swing.JSplitPane();
         DocTopPanel = new javax.swing.JPanel();
@@ -199,14 +215,16 @@ public ArrayList<Encounter> EncounterList;
                         .addGap(135, 135, 135)
                         .addComponent(locationLabel)
                         .addGap(81, 81, 81)
-                        .addComponent(locationTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 213, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(locationTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 213, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(comboHospLoc, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(PatientPanelLayout.createSequentialGroup()
                         .addGap(250, 250, 250)
                         .addComponent(searchButton, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(PatientPanelLayout.createSequentialGroup()
                         .addGap(118, 118, 118)
                         .addComponent(HospitalTable, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(213, Short.MAX_VALUE))
+                .addContainerGap(189, Short.MAX_VALUE))
         );
         PatientPanelLayout.setVerticalGroup(
             PatientPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -216,7 +234,8 @@ public ArrayList<Encounter> EncounterList;
                 .addGap(54, 54, 54)
                 .addGroup(PatientPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(locationLabel)
-                    .addComponent(locationTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(locationTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(comboHospLoc, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(error, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(28, 28, 28)
@@ -734,10 +753,18 @@ public ArrayList<Encounter> EncounterList;
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    //private void loadData()
+    //{
+      //  DefaultComboBoxModel model = new DefaultComboBoxModel();
+        //        model.addElement(new Community("1","Toronto"));
+        //      model.addElement(new Community("2","Vancouver"));
+        //        comboHospLoc.setModel(model);
+    //}
+    
     private void searchButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchButtonActionPerformed
         // TODO add your handling code here:
        
-        String location = locationTextField.getText();
+        
        
         
     }//GEN-LAST:event_searchButtonActionPerformed
@@ -917,6 +944,10 @@ public ArrayList<Encounter> EncounterList;
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new MainFrame().setVisible(true);
+                
+              
+                
+                
             }
         });
     }
@@ -953,6 +984,7 @@ public ArrayList<Encounter> EncounterList;
     private javax.swing.JPanel addEncounterPanel;
     private javax.swing.JButton addPatientButton;
     private javax.swing.JPanel addPatientPanel;
+    private javax.swing.JComboBox<String> comboHospLoc;
     private javax.swing.JLabel diagnosisLabel;
     private javax.swing.JLabel encounterBloodPressureLabel;
     private com.toedter.calendar.JDateChooser encounterDateField;
