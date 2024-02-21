@@ -13,6 +13,7 @@ public class Hospital {
     private String name;
     private String location;
     private Community community;
+    private Doctor doctor;
 
     public Integer getHospitalID() {
         return hospitalID;
@@ -44,14 +45,26 @@ public class Hospital {
 
     public void setCommunity(Community community) {
         this.community = community;
+        
     }
 
-    public Hospital(Integer hospitalID, String name, String location, Community community) {
+    public void setDoctor(Doctor doctor) {
+        this.doctor = doctor;
+    }
+
+    public Doctor getDoctor() {
+        return doctor;
+    }
+
+    public Hospital(Integer hospitalID, String name, String location, Community community, Doctor doctor) {
         this.hospitalID = hospitalID;
         this.name = name;
         this.location = location;
         this.community = community;
+        this.doctor = doctor;
     }
+    
+    
 
     public Hospital() {
     }
