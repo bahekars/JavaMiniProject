@@ -12,7 +12,6 @@ public class Doctor {
     private Integer doctorID;
     private String name;
     private String specialization;
-    private Hospital hospital;
     private String userName;
     private String password;
 
@@ -20,9 +19,7 @@ public class Doctor {
         return doctorID;
     }
 
-    public Hospital getHospital() {
-        return hospital;
-    }
+
 
     public String getName() {
         return name;
@@ -44,9 +41,7 @@ public class Doctor {
         this.doctorID = doctorID;
     }
 
-    public void setHospital(Hospital hospital) {
-        this.hospital = hospital;
-    }
+ 
 
     public void setName(String name) {
         this.name = name;
@@ -68,6 +63,18 @@ public class Doctor {
     public String toString() {
         return super.toString(); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/OverriddenMethodBody
     }
+
+    public Doctor() {
+    }
+
+    public Doctor(Integer doctorID, String name, String specialization) {
+        this.doctorID = doctorID;
+        this.name = name;
+        this.specialization = specialization;
+        
+    }
+    
+    
     
     
 }
