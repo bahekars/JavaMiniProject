@@ -16,8 +16,6 @@ public class Patient {
     private String name;
     private String dob;
     private String contactNumber;
-    private String userName;
-    private String password;
 
     public Integer getPatientID() {
         return patientID;
@@ -49,22 +47,6 @@ public class Patient {
 
     public void setContactNumber(String contactNumber) {
         this.contactNumber = contactNumber;
-    }
-
-    public String getUserName() {
-        return userName;
-    }
-
-    public void setUserName(String userName) {
-        this.userName = userName;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
     }
 
     public Patient(Integer patientID, String name, String dob, String contactNumber) {

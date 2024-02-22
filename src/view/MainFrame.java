@@ -4,6 +4,7 @@
  */
 package view;
 
+import java.awt.CardLayout;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import javax.swing.DefaultComboBoxModel;
@@ -25,12 +26,13 @@ import models.VitalSign;
 public class MainFrame extends javax.swing.JFrame {
 public ArrayList<Community> CommunityList = new ArrayList<Community>();
 public ArrayList<Hospital> HospitalList = new ArrayList<Hospital>();
-public ArrayList<Patient> PatientList;
-public ArrayList<Encounter> EncounterList;
+public ArrayList<Patient> PatientList = new ArrayList<Patient>();
+public ArrayList<Encounter> EncounterList = new ArrayList<Encounter>();
 public ArrayList<Doctor> DoctorList = new ArrayList<Doctor>();
 
 public Community comm = new Community();
 public ArrayList<String> locations = new ArrayList<>();
+public String role;
     
     /**
      * Creates new form MainFrame
@@ -46,6 +48,9 @@ public ArrayList<String> locations = new ArrayList<>();
         //model.addElement("Vancouver");
         model.addAll(locations);
         comboHospLoc.setModel(model);
+        
+        Patient patient = new Patient(1, "Rob" , "22-08-2019" , "7878787878");
+        PatientList.add(patient);
         
         Community community1 = new Community(1 , "Toronto");
         Community community2 = new Community(2 , "Vancouver");
@@ -91,9 +96,6 @@ public ArrayList<String> locations = new ArrayList<>();
         newEncounterButton = new javax.swing.JButton();
         viewPatientButton = new javax.swing.JButton();
         DocBotPanel = new javax.swing.JPanel();
-        viewPatientPanel = new javax.swing.JPanel();
-        jScrollPane2 = new javax.swing.JScrollPane();
-        viewPatientsTable = new javax.swing.JTable();
         addPatientPanel = new javax.swing.JPanel();
         patientNameLabel = new javax.swing.JLabel();
         patientDobLabel = new javax.swing.JLabel();
@@ -105,6 +107,9 @@ public ArrayList<String> locations = new ArrayList<>();
         patientDobField = new com.toedter.calendar.JDateChooser();
         addPatientButton = new javax.swing.JButton();
         newPatientError = new javax.swing.JLabel();
+        viewPatientPanel = new javax.swing.JPanel();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        viewPatientsTable = new javax.swing.JTable();
         addEncounterPanel = new javax.swing.JPanel();
         encounterDateLabel = new javax.swing.JLabel();
         encounterVitalSignLabel = new javax.swing.JLabel();
@@ -142,11 +147,11 @@ public ArrayList<String> locations = new ArrayList<>();
         LabelHospLoc = new javax.swing.JLabel();
         TextHospLoc = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
-        TextHospComm = new javax.swing.JTextField();
         ButtonAddHosp = new javax.swing.JButton();
         jScrollPane3 = new javax.swing.JScrollPane();
-        jTable2 = new javax.swing.JTable();
+        viewHospitalTable = new javax.swing.JTable();
         errorAdmin = new javax.swing.JLabel();
+        HospCombo = new javax.swing.JComboBox<>();
 
         jButton1.setText("jButton1");
 
@@ -155,10 +160,25 @@ public ArrayList<String> locations = new ArrayList<>();
         SplitPane.setOrientation(javax.swing.JSplitPane.VERTICAL_SPLIT);
 
         PatientView.setText("Patient");
+        PatientView.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                PatientViewActionPerformed(evt);
+            }
+        });
 
         DoctorView.setText("Doctor");
+        DoctorView.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                DoctorViewActionPerformed(evt);
+            }
+        });
 
         AdminView.setText("Admin");
+        AdminView.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                AdminViewActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout TopPanelLayout = new javax.swing.GroupLayout(TopPanel);
         TopPanel.setLayout(TopPanelLayout);
@@ -204,8 +224,18 @@ public ArrayList<String> locations = new ArrayList<>();
         });
 
         newEncounterButton.setText("Add new Encounter");
+        newEncounterButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                newEncounterButtonActionPerformed(evt);
+            }
+        });
 
         viewPatientButton.setText("View Patient Details");
+        viewPatientButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                viewPatientButtonActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout DocTopPanelLayout = new javax.swing.GroupLayout(DocTopPanel);
         DocTopPanel.setLayout(DocTopPanelLayout);
@@ -242,41 +272,6 @@ public ArrayList<String> locations = new ArrayList<>();
         DocSplitPane.setTopComponent(DocTopPanel);
 
         DocBotPanel.setLayout(new java.awt.CardLayout());
-
-        viewPatientPanel.addFocusListener(new java.awt.event.FocusAdapter() {
-            public void focusGained(java.awt.event.FocusEvent evt) {
-                viewPatientPanelFocusGained(evt);
-            }
-        });
-
-        viewPatientsTable.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-
-            },
-            new String [] {
-                "Id", "Name", "Date Of Birth", "Contact No", "Update", "Delete"
-            }
-        ));
-        jScrollPane2.setViewportView(viewPatientsTable);
-
-        javax.swing.GroupLayout viewPatientPanelLayout = new javax.swing.GroupLayout(viewPatientPanel);
-        viewPatientPanel.setLayout(viewPatientPanelLayout);
-        viewPatientPanelLayout.setHorizontalGroup(
-            viewPatientPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(viewPatientPanelLayout.createSequentialGroup()
-                .addGap(35, 35, 35)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 519, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(225, Short.MAX_VALUE))
-        );
-        viewPatientPanelLayout.setVerticalGroup(
-            viewPatientPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(viewPatientPanelLayout.createSequentialGroup()
-                .addGap(57, 57, 57)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 297, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(85, Short.MAX_VALUE))
-        );
-
-        DocBotPanel.add(viewPatientPanel, "card4");
 
         patientNameLabel.setText("Name");
 
@@ -376,6 +371,41 @@ public ArrayList<String> locations = new ArrayList<>();
         );
 
         DocBotPanel.add(addPatientPanel, "card2");
+
+        viewPatientPanel.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                viewPatientPanelFocusGained(evt);
+            }
+        });
+
+        viewPatientsTable.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Id", "Name", "Date Of Birth", "Contact No", "Update", "Delete", "View Encounter"
+            }
+        ));
+        jScrollPane2.setViewportView(viewPatientsTable);
+
+        javax.swing.GroupLayout viewPatientPanelLayout = new javax.swing.GroupLayout(viewPatientPanel);
+        viewPatientPanel.setLayout(viewPatientPanelLayout);
+        viewPatientPanelLayout.setHorizontalGroup(
+            viewPatientPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(viewPatientPanelLayout.createSequentialGroup()
+                .addGap(40, 40, 40)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 622, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(121, Short.MAX_VALUE))
+        );
+        viewPatientPanelLayout.setVerticalGroup(
+            viewPatientPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(viewPatientPanelLayout.createSequentialGroup()
+                .addGap(51, 51, 51)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 303, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(85, Short.MAX_VALUE))
+        );
+
+        DocBotPanel.add(viewPatientPanel, "card4");
 
         encounterDateLabel.setText("Date:");
 
@@ -659,12 +689,6 @@ public ArrayList<String> locations = new ArrayList<>();
 
         jLabel2.setText("Hospital Community");
 
-        TextHospComm.addFocusListener(new java.awt.event.FocusAdapter() {
-            public void focusLost(java.awt.event.FocusEvent evt) {
-                TextHospCommFocusLost(evt);
-            }
-        });
-
         ButtonAddHosp.setText("Add Hospital");
         ButtonAddHosp.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -672,7 +696,7 @@ public ArrayList<String> locations = new ArrayList<>();
             }
         });
 
-        jTable2.setModel(new javax.swing.table.DefaultTableModel(
+        viewHospitalTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -680,10 +704,10 @@ public ArrayList<String> locations = new ArrayList<>();
                 {null, null, null, null}
             },
             new String [] {
-                "Hospital Name", "Hospital Location", "Hospital Community", "Modify"
+                "Hospital Name", "Hospital Location", "Hospital Community", "Doctor"
             }
         ));
-        jScrollPane3.setViewportView(jTable2);
+        jScrollPane3.setViewportView(viewHospitalTable);
 
         errorAdmin.setForeground(new java.awt.Color(255, 51, 51));
 
@@ -711,10 +735,10 @@ public ArrayList<String> locations = new ArrayList<>();
                                     .addComponent(jLabel2)
                                     .addComponent(LabelHospName))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(AdminPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(TextHospName, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(TextHospComm, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(TextHospLoc, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE))))))
+                                .addGroup(AdminPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(TextHospName, javax.swing.GroupLayout.DEFAULT_SIZE, 154, Short.MAX_VALUE)
+                                    .addComponent(TextHospLoc, javax.swing.GroupLayout.DEFAULT_SIZE, 154, Short.MAX_VALUE)
+                                    .addComponent(HospCombo, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))))
                 .addContainerGap(158, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, AdminPanelLayout.createSequentialGroup()
                 .addGap(0, 0, Short.MAX_VALUE)
@@ -748,13 +772,13 @@ public ArrayList<String> locations = new ArrayList<>();
                     .addGroup(AdminPanelLayout.createSequentialGroup()
                         .addGap(18, 18, 18)
                         .addGroup(AdminPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(TextHospComm, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel2))))
+                            .addComponent(jLabel2)
+                            .addComponent(HospCombo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addGap(18, 18, 18)
                 .addComponent(errorAdmin)
-                .addGap(36, 36, 36)
+                .addGap(18, 18, 18)
                 .addComponent(ButtonAddHosp)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 211, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 244, Short.MAX_VALUE)
                 .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 213, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(55, 55, 55))
         );
@@ -794,9 +818,7 @@ public ArrayList<String> locations = new ArrayList<>();
       
 
                
-              
-      
-        
+            
        
         for(int i = 0; i < HospitalList.size(); i++)
         {
@@ -819,6 +841,10 @@ public ArrayList<String> locations = new ArrayList<>();
 
     private void newPatientViewButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_newPatientViewButtonActionPerformed
         // TODO add your handling code here:
+        DocBotPanel.removeAll();
+        DocBotPanel.add(addPatientPanel);
+        DocBotPanel.repaint();
+        DocBotPanel.revalidate();
     }//GEN-LAST:event_newPatientViewButtonActionPerformed
 
     private void patientIdFieldFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_patientIdFieldFocusLost
@@ -910,12 +936,6 @@ public ArrayList<String> locations = new ArrayList<>();
         errorAdmin.setText("Please check the entered value");}
     }//GEN-LAST:event_TextHospLocFocusLost
 
-    private void TextHospCommFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_TextHospCommFocusLost
-        // TODO add your handling code here:
-        if(!TextHospComm.getText().matches("[a-zA-Z]+") || TextHospComm.getText().isEmpty()){
-        errorAdmin.setText("Please check the entered value");}
-    }//GEN-LAST:event_TextHospCommFocusLost
-
     private void ButtonCommunityActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ButtonCommunityActionPerformed
         // TODO add your handling code here:
         Community community1 = new Community(1 , "Toronto");
@@ -927,33 +947,49 @@ public ArrayList<String> locations = new ArrayList<>();
 
     private void ButtonAddHospActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ButtonAddHospActionPerformed
         // TODO add your handling code here:
-
-       HospitalList.add(new Hospital(3, TextHospName.getText(), TextHospLoc.getText(), CommunityList.get(0), DoctorList.get(0)));
+       DefaultTableModel model = (DefaultTableModel)viewHospitalTable.getModel();
+       model.setRowCount(0);
+       Object rowData[] = new Object[4]; 
+       Community community = new Community();
+       for(int i = 0; i < CommunityList.size(); i++){
+     if(CommunityList.get(i).getName().contains(HospCombo.getSelectedItem().toString())){
+     community = CommunityList.get(i);
+     }}
+       HospitalList.add(new Hospital(3, TextHospName.getText(), TextHospLoc.getText(), community , DoctorList.get(0)));
      
+       for(int i = 0; i < HospitalList.size(); i++)
+        {
+          
+        rowData[0] = HospitalList.get(i).getName();
+        rowData[1] = HospitalList.get(i).getLocation();
+        rowData[2] = HospitalList.get(i).getCommunity().getName();
+        rowData[3] = HospitalList.get(i).getDoctor().getName();
+        model.addRow(rowData);}
+        
     }//GEN-LAST:event_ButtonAddHospActionPerformed
 
     private void addPatientButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addPatientButtonActionPerformed
         // TODO add your handling code here:
-        Patient patient = new Patient(1, "Rob" , "22-08-2019" , "7878787878");
-        PatientList.add(1, patient);
+        
         PatientList.add(new Patient(Integer.parseInt(patientIdField.getText()), patientNameField.getText(),patientDobField.getDateFormatString(),patientContactNoField.getText()));
         
         // Display Patients
         DefaultTableModel patientModel = new DefaultTableModel();
         
          patientModel.setRowCount(0);
-       Object rowData[] = new Object[6]; 
+       Object rowData[] = new Object[7]; 
        
         for(int i = 0; i < PatientList.size(); i++)
         {
      
-         rowData[0] = PatientList.get(i).getPatientID();
+        rowData[0] = PatientList.get(i).getPatientID();
         rowData[1] = PatientList.get(i).getName();
         rowData[2] = PatientList.get(i).getDob();
         rowData[3] = PatientList.get(i).getContactNumber();
         rowData[4] = new JButton("Update");
         rowData[5] = new JButton("Delete");
-         patientModel.addRow(rowData);}
+        rowData[6] = new JButton("View Encounter");
+        patientModel.addRow(rowData);}
 
         
     }//GEN-LAST:event_addPatientButtonActionPerformed
@@ -969,8 +1005,77 @@ public ArrayList<String> locations = new ArrayList<>();
     private void viewPatientPanelFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_viewPatientPanelFocusGained
 
         // TODO add your handling code here:
-     
+      
     }//GEN-LAST:event_viewPatientPanelFocusGained
+
+    private void viewPatientButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_viewPatientButtonActionPerformed
+        // TODO add your handling code here:
+        
+       DefaultTableModel patientModel = (DefaultTableModel)viewPatientsTable.getModel();
+       patientModel.setRowCount(0);
+       Object rowData[] = new Object[7]; 
+       
+        for(int i = 0; i < PatientList.size(); i++)
+        {
+     
+        rowData[0] = PatientList.get(i).getPatientID();
+        rowData[1] = PatientList.get(i).getName();
+        rowData[2] = PatientList.get(i).getDob();
+        rowData[3] = PatientList.get(i).getContactNumber();
+        rowData[4] = new JButton("Update");
+        rowData[5] = new JButton("Delete");
+        rowData[6] = new JButton("View Encounter");
+        patientModel.addRow(rowData);
+        }
+     
+        System.out.println(PatientList.size());                      
+        
+        DocBotPanel.removeAll();
+        DocBotPanel.add(viewPatientPanel);
+        DocBotPanel.repaint();
+        DocBotPanel.revalidate();
+//        CardLayout layout = (CardLayout) viewPatientPanel.getLayout();
+//            layout.next(viewPatientPanel);
+    }//GEN-LAST:event_viewPatientButtonActionPerformed
+
+    private void newEncounterButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_newEncounterButtonActionPerformed
+        // TODO add your handling code here:
+        DocBotPanel.removeAll();
+        DocBotPanel.add(addEncounterPanel);
+        DocBotPanel.repaint();
+        DocBotPanel.revalidate();
+    }//GEN-LAST:event_newEncounterButtonActionPerformed
+
+    private void AdminViewActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AdminViewActionPerformed
+        // TODO add your handling code here:
+        
+        DefaultComboBoxModel model = new DefaultComboBoxModel();
+        //model.addElement("Toronto");
+        //model.addElement("Vancouver");
+        model.addAll(locations);
+        HospCombo.setModel(model);
+        
+        BottomPanel.removeAll();
+        BottomPanel.add(AdminPanel);
+        BottomPanel.repaint();
+        BottomPanel.revalidate();
+    }//GEN-LAST:event_AdminViewActionPerformed
+
+    private void DoctorViewActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DoctorViewActionPerformed
+        // TODO add your handling code here:
+        BottomPanel.removeAll();
+        BottomPanel.add(DoctorPanel);
+        BottomPanel.repaint();
+        BottomPanel.revalidate();
+    }//GEN-LAST:event_DoctorViewActionPerformed
+
+    private void PatientViewActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PatientViewActionPerformed
+        // TODO add your handling code here:
+        BottomPanel.removeAll();
+        BottomPanel.add(PatientPanel);
+        BottomPanel.repaint();
+        BottomPanel.revalidate();
+    }//GEN-LAST:event_PatientViewActionPerformed
 
     /**
      * @param args the command line arguments
@@ -1023,6 +1128,7 @@ public ArrayList<String> locations = new ArrayList<>();
     private javax.swing.JPanel DoctorPanel;
     private javax.swing.JButton DoctorView;
     private javax.swing.JTextField EncounterBloodField;
+    private javax.swing.JComboBox<String> HospCombo;
     private javax.swing.JTable HospitalDetails;
     private javax.swing.JScrollPane HospitalTable;
     private javax.swing.JLabel LabelAdmin;
@@ -1035,7 +1141,6 @@ public ArrayList<String> locations = new ArrayList<>();
     private javax.swing.JButton PatientView;
     private javax.swing.JSplitPane SplitPane;
     private javax.swing.JTextField TextCommunity;
-    private javax.swing.JTextField TextHospComm;
     private javax.swing.JTextField TextHospLoc;
     private javax.swing.JTextField TextHospName;
     private javax.swing.JPanel TopPanel;
@@ -1066,7 +1171,6 @@ public ArrayList<String> locations = new ArrayList<>();
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
-    private javax.swing.JTable jTable2;
     private javax.swing.JLabel locationLabel;
     private javax.swing.JButton newEncounterButton;
     private javax.swing.JLabel newPatientError;
@@ -1080,6 +1184,7 @@ public ArrayList<String> locations = new ArrayList<>();
     private javax.swing.JTextField patientNameField;
     private javax.swing.JLabel patientNameLabel;
     private javax.swing.JButton searchButton;
+    private javax.swing.JTable viewHospitalTable;
     private javax.swing.JButton viewPatientButton;
     private javax.swing.JPanel viewPatientPanel;
     private javax.swing.JTable viewPatientsTable;
