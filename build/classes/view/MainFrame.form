@@ -87,16 +87,25 @@
               <Properties>
                 <Property name="text" type="java.lang.String" value="Patient"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="PatientViewActionPerformed"/>
+              </Events>
             </Component>
             <Component class="javax.swing.JButton" name="DoctorView">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Doctor"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="DoctorViewActionPerformed"/>
+              </Events>
             </Component>
             <Component class="javax.swing.JButton" name="AdminView">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Admin"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="AdminViewActionPerformed"/>
+              </Events>
             </Component>
           </SubComponents>
         </Container>
@@ -209,6 +218,9 @@
                           <Properties>
                             <Property name="text" type="java.lang.String" value="Add new Encounter"/>
                           </Properties>
+                          <Events>
+                            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="newEncounterButtonActionPerformed"/>
+                          </Events>
                         </Component>
                         <Component class="javax.swing.JButton" name="viewPatientButton">
                           <Properties>
@@ -372,17 +384,17 @@
                             <DimensionLayout dim="0">
                               <Group type="103" groupAlignment="0" attributes="0">
                                   <Group type="102" alignment="0" attributes="0">
-                                      <EmptySpace min="-2" pref="35" max="-2" attributes="0"/>
-                                      <Component id="jScrollPane2" min="-2" pref="519" max="-2" attributes="0"/>
-                                      <EmptySpace pref="225" max="32767" attributes="0"/>
+                                      <EmptySpace min="-2" pref="40" max="-2" attributes="0"/>
+                                      <Component id="jScrollPane2" min="-2" pref="622" max="-2" attributes="0"/>
+                                      <EmptySpace pref="121" max="32767" attributes="0"/>
                                   </Group>
                               </Group>
                             </DimensionLayout>
                             <DimensionLayout dim="1">
                               <Group type="103" groupAlignment="0" attributes="0">
                                   <Group type="102" alignment="0" attributes="0">
-                                      <EmptySpace min="-2" pref="57" max="-2" attributes="0"/>
-                                      <Component id="jScrollPane2" min="-2" pref="297" max="-2" attributes="0"/>
+                                      <EmptySpace min="-2" pref="51" max="-2" attributes="0"/>
+                                      <Component id="jScrollPane2" min="-2" pref="303" max="-2" attributes="0"/>
                                       <EmptySpace pref="85" max="32767" attributes="0"/>
                                   </Group>
                               </Group>
@@ -399,13 +411,14 @@
                                 <Component class="javax.swing.JTable" name="viewPatientsTable">
                                   <Properties>
                                     <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
-                                      <Table columnCount="6" rowCount="0">
+                                      <Table columnCount="7" rowCount="0">
                                         <Column editable="true" title="Id" type="java.lang.Object"/>
                                         <Column editable="true" title="Name" type="java.lang.Object"/>
                                         <Column editable="true" title="Date Of Birth" type="java.lang.Object"/>
                                         <Column editable="true" title="Contact No" type="java.lang.Object"/>
                                         <Column editable="true" title="Update" type="java.lang.Object"/>
                                         <Column editable="true" title="Delete" type="java.lang.Object"/>
+                                        <Column editable="true" title="View Encounter" type="java.lang.Object"/>
                                       </Table>
                                     </Property>
                                     <Property name="columnModel" type="javax.swing.table.TableColumnModel" editor="org.netbeans.modules.form.editors2.TableColumnModelEditor">
@@ -843,10 +856,10 @@
                                               <Component id="LabelHospName" alignment="0" min="-2" max="-2" attributes="0"/>
                                           </Group>
                                           <EmptySpace max="-2" attributes="0"/>
-                                          <Group type="103" groupAlignment="0" attributes="0">
-                                              <Component id="TextHospName" min="-2" pref="154" max="-2" attributes="0"/>
-                                              <Component id="TextHospComm" min="-2" pref="154" max="-2" attributes="0"/>
-                                              <Component id="TextHospLoc" min="-2" pref="154" max="-2" attributes="0"/>
+                                          <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                              <Component id="TextHospName" pref="154" max="32767" attributes="0"/>
+                                              <Component id="TextHospLoc" pref="154" max="32767" attributes="0"/>
+                                              <Component id="HospCombo" alignment="0" max="32767" attributes="0"/>
                                           </Group>
                                       </Group>
                                   </Group>
@@ -894,16 +907,16 @@
                               <Group type="102" alignment="0" attributes="0">
                                   <EmptySpace type="separate" max="-2" attributes="0"/>
                                   <Group type="103" groupAlignment="3" attributes="0">
-                                      <Component id="TextHospComm" alignment="3" min="-2" max="-2" attributes="0"/>
                                       <Component id="jLabel2" alignment="3" min="-2" max="-2" attributes="0"/>
+                                      <Component id="HospCombo" alignment="3" min="-2" max="-2" attributes="0"/>
                                   </Group>
                               </Group>
                           </Group>
                           <EmptySpace type="separate" max="-2" attributes="0"/>
                           <Component id="errorAdmin" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace min="-2" pref="36" max="-2" attributes="0"/>
+                          <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
                           <Component id="ButtonAddHosp" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace pref="211" max="32767" attributes="0"/>
+                          <EmptySpace pref="244" max="32767" attributes="0"/>
                           <Component id="jScrollPane3" min="-2" pref="213" max="-2" attributes="0"/>
                           <EmptySpace min="-2" pref="55" max="-2" attributes="0"/>
                       </Group>
@@ -962,11 +975,6 @@
                     <Property name="text" type="java.lang.String" value="Hospital Community"/>
                   </Properties>
                 </Component>
-                <Component class="javax.swing.JTextField" name="TextHospComm">
-                  <Events>
-                    <EventHandler event="focusLost" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="TextHospCommFocusLost"/>
-                  </Events>
-                </Component>
                 <Component class="javax.swing.JButton" name="ButtonAddHosp">
                   <Properties>
                     <Property name="text" type="java.lang.String" value="Add Hospital"/>
@@ -982,14 +990,14 @@
 
                   <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
                   <SubComponents>
-                    <Component class="javax.swing.JTable" name="jTable2">
+                    <Component class="javax.swing.JTable" name="viewHospitalTable">
                       <Properties>
                         <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
                           <Table columnCount="4" rowCount="4">
                             <Column editable="true" title="Hospital Name" type="java.lang.Object"/>
                             <Column editable="true" title="Hospital Location" type="java.lang.Object"/>
                             <Column editable="true" title="Hospital Community" type="java.lang.Object"/>
-                            <Column editable="true" title="Modify" type="java.lang.Object"/>
+                            <Column editable="true" title="Doctor" type="java.lang.Object"/>
                           </Table>
                         </Property>
                       </Properties>
@@ -1002,6 +1010,16 @@
                       <Color blue="33" green="33" red="ff" type="rgb"/>
                     </Property>
                   </Properties>
+                </Component>
+                <Component class="javax.swing.JComboBox" name="HospCombo">
+                  <Properties>
+                    <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
+                      <StringArray count="0"/>
+                    </Property>
+                  </Properties>
+                  <AuxValues>
+                    <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
+                  </AuxValues>
                 </Component>
               </SubComponents>
             </Container>
