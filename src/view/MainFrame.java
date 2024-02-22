@@ -4,6 +4,9 @@
  */
 package view;
 
+import cellModifier.TableActionCellEditor;
+import cellModifier.TableActionCellRender;
+import cellModifier.TableActionEvent;
 import java.awt.CardLayout;
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -41,13 +44,15 @@ public String role;
         initComponents();
         
         //loadData();
-        locations = (ArrayList)comm.getList();
+        //locations = (ArrayList)comm.getList();
           //add combobox default values here
-        DefaultComboBoxModel model = new DefaultComboBoxModel();
+        //DefaultComboBoxModel model = new DefaultComboBoxModel();
         //model.addElement("Toronto");
         //model.addElement("Vancouver");
-        model.addAll(locations);
-        comboHospLoc.setModel(model);
+        //DefaultComboBoxModel model = new DefaultComboBoxModel();
+        //model.addAll(locations);
+        //comboHospLoc.setModel(model);
+        
         
         Patient patient = new Patient(1, "Rob" , "22-08-2019" , "7878787878");
         PatientList.add(patient);
@@ -56,6 +61,16 @@ public String role;
         Community community2 = new Community(2 , "Vancouver");
         CommunityList.add(community1);
         CommunityList.add(community2); 
+        
+       for(Community i : CommunityList)
+       {
+          locations.add(i.getName());
+       }
+       
+        DefaultComboBoxModel model = new DefaultComboBoxModel();
+        model.addAll(locations);
+        comboHospLoc.setModel(model);
+        comboHospLoc.setSelectedIndex(0);
         
         Doctor doctor1 = new Doctor(1, "Clark Kent", "Orthopedics");
         Doctor doctor2 = new Doctor(2, "Will Smith", "Cardiac");
@@ -383,9 +398,18 @@ public String role;
 
             },
             new String [] {
-                "Id", "Name", "Date Of Birth", "Contact No", "Update", "Delete", "View Encounter"
+                "Id", "Name", "Date Of Birth", "Contact No", "Action"
             }
-        ));
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, true, true
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        viewPatientsTable.setRowHeight(30);
         jScrollPane2.setViewportView(viewPatientsTable);
 
         javax.swing.GroupLayout viewPatientPanelLayout = new javax.swing.GroupLayout(viewPatientPanel);
@@ -977,7 +1001,7 @@ public String role;
         DefaultTableModel patientModel = new DefaultTableModel();
         
          patientModel.setRowCount(0);
-       Object rowData[] = new Object[7]; 
+       Object rowData[] = new Object[5]; 
        
         for(int i = 0; i < PatientList.size(); i++)
         {
@@ -986,10 +1010,11 @@ public String role;
         rowData[1] = PatientList.get(i).getName();
         rowData[2] = PatientList.get(i).getDob();
         rowData[3] = PatientList.get(i).getContactNumber();
-        rowData[4] = new JButton("Update");
-        rowData[5] = new JButton("Delete");
-        rowData[6] = new JButton("View Encounter");
+       // rowData[4] = new JButton("View Encounter");
+        rowData[4] = new JButton("Action");
+        
         patientModel.addRow(rowData);}
+      
 
         
     }//GEN-LAST:event_addPatientButtonActionPerformed
@@ -1013,7 +1038,7 @@ public String role;
         
        DefaultTableModel patientModel = (DefaultTableModel)viewPatientsTable.getModel();
        patientModel.setRowCount(0);
-       Object rowData[] = new Object[7]; 
+       Object rowData[] = new Object[5]; 
        
         for(int i = 0; i < PatientList.size(); i++)
         {
@@ -1022,12 +1047,38 @@ public String role;
         rowData[1] = PatientList.get(i).getName();
         rowData[2] = PatientList.get(i).getDob();
         rowData[3] = PatientList.get(i).getContactNumber();
-        rowData[4] = new JButton("Update");
-        rowData[5] = new JButton("Delete");
-        rowData[6] = new JButton("View Encounter");
+        rowData[4] = new JButton("Action");
+       
+        //rowData[4] = new JButton("Update");
+        // rowData[5] = new JButton("Delete");
+        // rowData[6] = new JButton("View Encounter");
         patientModel.addRow(rowData);
         }
-     
+       
+        TableActionEvent event = new TableActionEvent() {
+            @Override
+            public void onEdit(int row) {
+                
+                System.out.println("Edit row:" + row);
+            }
+
+            @Override
+            public void onDelete(int row) {
+                if(viewPatientsTable.isEditing()){
+                    viewPatientsTable.getCellEditor().stopCellEditing();
+                }
+               // DefaultTableModel model = (DefaultTableModel) viewPatientsTable.getModel();
+                patientModel.removeRow(row);
+            }
+
+           @Override
+           public void onView(int row) {
+               System.out.println("View Encounter:" + row);
+           }
+        };
+          viewPatientsTable.getColumnModel().getColumn(4).setCellRenderer(new TableActionCellRender());
+        viewPatientsTable.getColumnModel().getColumn(4).setCellEditor(new TableActionCellEditor(event));
+        
         System.out.println(PatientList.size());                      
         
         DocBotPanel.removeAll();
@@ -1054,7 +1105,7 @@ public String role;
         //model.addElement("Vancouver");
         model.addAll(locations);
         HospCombo.setModel(model);
-        
+        HospCombo.setSelectedIndex(0);
         BottomPanel.removeAll();
         BottomPanel.add(AdminPanel);
         BottomPanel.repaint();
