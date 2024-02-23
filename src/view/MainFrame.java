@@ -4,16 +4,23 @@
  */
 package view;
 
+
 import cellModifier.TableActionCellEditor;
 import cellModifier.TableActionCellRender;
 import cellModifier.TableActionEvent;
 import java.awt.CardLayout;
+import java.text.SimpleDateFormat;
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.format.FormatStyle;
 import java.util.ArrayList;
 import javax.swing.DefaultComboBoxModel;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
+import javax.swing.JScrollPane;
+import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
 import models.Community;
 import models.Doctor;
@@ -43,18 +50,9 @@ public String role;
     public MainFrame() {
         initComponents();
         
-        //loadData();
-        //locations = (ArrayList)comm.getList();
-          //add combobox default values here
-        //DefaultComboBoxModel model = new DefaultComboBoxModel();
-        //model.addElement("Toronto");
-        //model.addElement("Vancouver");
-        //DefaultComboBoxModel model = new DefaultComboBoxModel();
-        //model.addAll(locations);
-        //comboHospLoc.setModel(model);
+      
         
-        
-        Patient patient = new Patient(1, "Rob" , "22-08-2019" , "7878787878");
+        Patient patient = new Patient(10, "Rob" , "22-08-2019" , "7878787878");
         PatientList.add(patient);
         
         Community community1 = new Community(1 , "Toronto");
@@ -72,6 +70,11 @@ public String role;
         comboHospLoc.setModel(model);
         comboHospLoc.setSelectedIndex(0);
         
+        DefaultComboBoxModel hospComboModel = new DefaultComboBoxModel();
+        hospComboModel.addAll(locations);
+        HospCombo.setModel(model);
+        HospCombo.setSelectedIndex(0);
+        
         Doctor doctor1 = new Doctor(1, "Clark Kent", "Orthopedics");
         Doctor doctor2 = new Doctor(2, "Will Smith", "Cardiac");
     
@@ -84,7 +87,9 @@ public String role;
         HospitalList.add(hospital1);
         HospitalList.add(hospital2);
         
-
+        SimpleDateFormat format1 = new SimpleDateFormat("yyyy-MM-dd");
+        Encounter encounter1 = new Encounter(1, LocalDate.parse("2024-01-20", DateTimeFormatter.ISO_DATE), PatientList.get(0), new VitalSign(1, 76, 65, 77, 98),"All Good");        
+        EncounterList.add(encounter1);
       }
 
     /**
@@ -318,7 +323,6 @@ public String role;
         DocTopPanel.setBackground(new java.awt.Color(204, 255, 204));
         DocTopPanel.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         DocTopPanel.setPreferredSize(new java.awt.Dimension(783, 80));
-        DocTopPanel.setSize(new java.awt.Dimension(783, 120));
 
         LabelDoctor.setFont(new java.awt.Font("Helvetica Neue", 1, 18)); // NOI18N
         LabelDoctor.setText("Doctor Panel");
@@ -387,7 +391,6 @@ public String role;
 
         addPatientPanel.setBackground(new java.awt.Color(0, 153, 153));
         addPatientPanel.setPreferredSize(new java.awt.Dimension(783, 120));
-        addPatientPanel.setSize(new java.awt.Dimension(783, 120));
 
         patientNameLabel.setText("Name");
 
@@ -621,6 +624,10 @@ public String role;
                         .addGap(136, 136, 136)
                         .addGroup(addEncounterPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(addEncounterPanelLayout.createSequentialGroup()
+                                .addComponent(diagnosisLabel)
+                                .addGap(18, 18, 18)
+                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 268, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(addEncounterPanelLayout.createSequentialGroup()
                                 .addGroup(addEncounterPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(addEncounterPanelLayout.createSequentialGroup()
                                         .addGap(53, 53, 53)
@@ -634,25 +641,21 @@ public String role;
                                 .addGap(39, 39, 39)
                                 .addGroup(addEncounterPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                                     .addComponent(encounterDateField, javax.swing.GroupLayout.DEFAULT_SIZE, 170, Short.MAX_VALUE)
-                                    .addComponent(encounterPatientIdField)))
-                            .addGroup(addEncounterPanelLayout.createSequentialGroup()
-                                .addComponent(diagnosisLabel)
-                                .addGap(18, 18, 18)
-                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 268, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                    .addComponent(encounterPatientIdField))
+                                .addGap(32, 32, 32)
+                                .addComponent(errorEncounter, javax.swing.GroupLayout.PREFERRED_SIZE, 203, javax.swing.GroupLayout.PREFERRED_SIZE))))
                     .addGroup(addEncounterPanelLayout.createSequentialGroup()
                         .addGap(254, 254, 254)
                         .addComponent(addEncounterButton)))
-                .addGap(300, 300, 300))
+                .addGap(91, 91, 91))
             .addGroup(addEncounterPanelLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap(287, Short.MAX_VALUE)
                 .addGroup(addEncounterPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(encounterTemperatureField)
                     .addComponent(EncounterBloodField)
                     .addComponent(encounterHeartField)
                     .addComponent(encounterRespField, javax.swing.GroupLayout.DEFAULT_SIZE, 170, Short.MAX_VALUE))
-                .addGap(140, 140, 140)
-                .addComponent(errorEncounter, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(123, 123, 123))
+                .addGap(326, 326, 326))
         );
         addEncounterPanelLayout.setVerticalGroup(
             addEncounterPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -661,21 +664,21 @@ public String role;
                 .addGroup(addEncounterPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(encounterPatientLabel)
                     .addComponent(encounterPatientIdField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(addEncounterPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(encounterDateLabel)
-                    .addComponent(encounterDateField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGroup(addEncounterPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(addEncounterPanelLayout.createSequentialGroup()
+                        .addGap(18, 18, 18)
+                        .addGroup(addEncounterPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(encounterDateLabel)
+                            .addComponent(encounterDateField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(25, 25, 25)
-                        .addComponent(encounterVitalSignLabel)
-                        .addGap(28, 28, 28)
-                        .addGroup(addEncounterPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(encounterHeartRateLabel)
-                            .addComponent(encounterHeartField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, addEncounterPanelLayout.createSequentialGroup()
-                        .addGap(57, 57, 57)
+                        .addComponent(encounterVitalSignLabel))
+                    .addGroup(addEncounterPanelLayout.createSequentialGroup()
+                        .addGap(32, 32, 32)
                         .addComponent(errorEncounter, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(28, 28, 28)
+                .addGroup(addEncounterPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(encounterHeartRateLabel)
+                    .addComponent(encounterHeartField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(addEncounterPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(encounterBloodPressureLabel)
@@ -688,7 +691,7 @@ public String role;
                 .addGroup(addEncounterPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(encounterRespiratoryRateLabel)
                     .addComponent(encounterRespField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 25, Short.MAX_VALUE)
                 .addGroup(addEncounterPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(diagnosisLabel)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -948,23 +951,14 @@ public String role;
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    //private void loadData()
-    //{
-      //  DefaultComboBoxModel model = new DefaultComboBoxModel();
-        //        model.addElement(new Community("1","Toronto"));
-        //      model.addElement(new Community("2","Vancouver"));
-        //        comboHospLoc.setModel(model);
-    //}
+
     
     private void searchButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchButtonActionPerformed
         // TODO add your handling code here:
-       Integer selectedLocation = comboHospLoc.getSelectedIndex();
+       
        DefaultTableModel model = (DefaultTableModel)HospitalDetails.getModel();
         model.setRowCount(0);
-       Object rowData[] = new Object[4]; 
-      
-
-               
+       Object rowData[] = new Object[4];        
             
        
         for(int i = 0; i < HospitalList.size(); i++)
@@ -996,7 +990,7 @@ public String role;
 
     private void patientIdFieldFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_patientIdFieldFocusLost
         // TODO add your handling code here:
-        if(!patientIdField.getText().matches("^[0-9]*$") || patientIdField.getText().length()!=2){
+        if(!patientIdField.getText().matches("^[0-9]*$") || patientIdField.getText().length() !=2){
         newPatientError.setText("Please check the entered value");}
     }//GEN-LAST:event_patientIdFieldFocusLost
 
@@ -1085,11 +1079,25 @@ public String role;
 
     private void ButtonCommunityActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ButtonCommunityActionPerformed
         // TODO add your handling code here:
-        Community community1 = new Community(1 , "Toronto");
-        Community community2 = new Community(2 , "Vancouver");
-        CommunityList.add(community1);
-        CommunityList.add(community2);
-        CommunityList.add(new Community(3 , TextCommunity.getText()));
+//        Community community1 = new Community(1 , "Toronto");
+//        Community community2 = new Community(2 , "Vancouver");
+//        CommunityList.add(community1);
+//        CommunityList.add(community2);
+        CommunityList.add(new Community(CommunityList.size() +1 , TextCommunity.getText()));
+        locations.removeAll(locations);
+        for(Community i : CommunityList)
+        {
+           locations.add(i.getName());
+        }
+       
+        DefaultComboBoxModel model = new DefaultComboBoxModel();
+        model.removeAllElements();
+        model.addAll(locations);
+        HospCombo.removeAllItems();
+        HospCombo.setModel(model);
+        HospCombo.setSelectedIndex(0);
+        
+        
     }//GEN-LAST:event_ButtonCommunityActionPerformed
 
     private void ButtonAddHospActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ButtonAddHospActionPerformed
@@ -1117,14 +1125,14 @@ public String role;
 
     private void addPatientButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addPatientButtonActionPerformed
         // TODO add your handling code here:
-        
-        PatientList.add(new Patient(Integer.parseInt(patientIdField.getText()), patientNameField.getText(),patientDobField.getDateFormatString(),patientContactNoField.getText()));
+        SimpleDateFormat format1 = new SimpleDateFormat("dd-MM-yyyy");
+        PatientList.add(new Patient(Integer.parseInt(patientIdField.getText()), patientNameField.getText(),format1.format(patientDobField.getCalendar().getTime()), patientContactNoField.getText()));
         
         // Display Patients
         DefaultTableModel patientModel = new DefaultTableModel();
-        
-         patientModel.setRowCount(0);
-       Object rowData[] = new Object[5]; 
+        //DefaultTableModel model = (DefaultTableModel)HospitalDetails.getModel();
+        // patientModel.setRowCount(0);
+       Object rowData[] = new Object[4]; 
        
         for(int i = 0; i < PatientList.size(); i++)
         {
@@ -1134,19 +1142,43 @@ public String role;
         rowData[2] = PatientList.get(i).getDob();
         rowData[3] = PatientList.get(i).getContactNumber();
        // rowData[4] = new JButton("View Encounter");
-        rowData[4] = new JButton("Action");
+        //rowData[5] = new JButton("Action");
         
         patientModel.addRow(rowData);}
       
-
+        patientNameField.setText("");
+        patientIdField.setText("");
+        patientContactNoField.setText("");
         
     }//GEN-LAST:event_addPatientButtonActionPerformed
 
     private void addEncounterButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addEncounterButtonActionPerformed
         // TODO add your handling code here:
-        Encounter encounter1 = new Encounter(1, LocalDate.now(), PatientList.get(0), new VitalSign(1, 76, 65, 77, 98) , "All good!");
-        EncounterList.add(encounter1);
-        EncounterList.add(new Encounter(2, LocalDate.now(), PatientList.get(0), new VitalSign(1, 56, 95, 67, 78), encounterDiagnosisField.getText()));
+       // Encounter encounter1 = new Encounter(1, LocalDate.now(), PatientList.get(0), new VitalSign(1, 76, 65, 77, 98) , "All good!");
+        //EncounterList.add(encounter1);
+         SimpleDateFormat format1 = new SimpleDateFormat("yyyy-MM-dd");
+        
+        Integer patientId = Integer.parseInt(encounterPatientIdField.getText());
+        VitalSign vitals = new VitalSign();
+        vitals.setHeartRate(Integer.parseInt(encounterHeartField.getText()));
+        vitals.setBloodPressure(Integer.parseInt(EncounterBloodField.getText()));
+        vitals.setTemprature(Integer.parseInt(encounterTemperatureField.getText()));
+        vitals.setRespiratoryRate(Integer.parseInt(encounterRespField.getText()));
+        vitals.setVitalsignID(EncounterList.size()+1);
+        
+        for(int i = 0; i < PatientList.size(); i++)
+        {
+            
+            if(PatientList.get(i).getPatientID().toString().equals(patientId.toString()))
+            {
+                EncounterList.add(new Encounter(EncounterList.size() + 1, LocalDate.parse(format1.format(encounterDateField.getCalendar().getTime()),DateTimeFormatter.ISO_DATE) , PatientList.get(i), vitals, encounterDiagnosisField.getText()));
+            }
+            else
+            {
+                errorEncounter.setText("Enter valid PatientID.");
+            }
+        }
+        
        
     }//GEN-LAST:event_addEncounterButtonActionPerformed
 
@@ -1170,39 +1202,70 @@ public String role;
         rowData[1] = PatientList.get(i).getName();
         rowData[2] = PatientList.get(i).getDob();
         rowData[3] = PatientList.get(i).getContactNumber();
+       // rowData[4] = "Encounter Info";
         rowData[4] = new JButton("Action");
        
-        //rowData[4] = new JButton("Update");
-        // rowData[5] = new JButton("Delete");
-        // rowData[6] = new JButton("View Encounter");
         patientModel.addRow(rowData);
+        
         }
+        
+        
        
         TableActionEvent event = new TableActionEvent() {
             @Override
             public void onEdit(int row) {
-                
-                System.out.println("Edit row:" + row);
+               String contactNo = patientModel.getValueAt(row, 3).toString();
+                PatientList.get(row).setContactNumber(contactNo);
+               
             }
 
             @Override
             public void onDelete(int row) {
-                if(viewPatientsTable.isEditing()){
+                
+                 if(viewPatientsTable.isEditing()){
                     viewPatientsTable.getCellEditor().stopCellEditing();
                 }
-               // DefaultTableModel model = (DefaultTableModel) viewPatientsTable.getModel();
                 patientModel.removeRow(row);
+                PatientList.remove(row);
             }
 
            @Override
            public void onView(int row) {
+            
+               int id = PatientList.get(row).getPatientID();
+            
+                StringBuilder details = new StringBuilder();
+                for(int i = 0; i < EncounterList.size(); i++)
+                {
+
+                if(EncounterList.get(i).getPatient().getPatientID().equals(id)){
+                    
+                    String vitals = "Hear Rate:"+ EncounterList.get(i).getVitalSign().getHeartRate()+ ", BloodPressure:" +
+                            EncounterList.get(i).getVitalSign().getBloodPressure()+ ", RespiratoryRate:" +
+                            EncounterList.get(i).getVitalSign().getRespiratoryRate();
+                    //details.append("PatientID: ").append(EncounterList.get(i).getPatient().getPatientID()).append("\n");
+                    details.append("Encounter Date: ").append(EncounterList.get(i).getDate().toString()).append("\n");
+                    details.append("Doctor: ").append("Clark").append("\n");//.append(EncounterList.get(i).getDoctor().getName()).append("\n");
+                    details.append("Vital Sign: ").append(vitals).append("\n");
+                    details.append("Diagnosis: ").append(EncounterList.get(i).getDiagnosis()).append("\n");
+
+                    }
+
+                }
+
+             
+                JOptionPane.showMessageDialog(viewPatientsTable, details.toString(), "Encounter Details", JOptionPane.INFORMATION_MESSAGE);
+             //  JOptionPane.showMessageDialog(viewPatientsTable, EncounterList.get(0));
                System.out.println("View Encounter:" + row);
            }
         };
-          viewPatientsTable.getColumnModel().getColumn(4).setCellRenderer(new TableActionCellRender());
+        viewPatientsTable.getColumnModel().getColumn(4).setCellRenderer(new TableActionCellRender());
         viewPatientsTable.getColumnModel().getColumn(4).setCellEditor(new TableActionCellEditor(event));
+        //viewPatientsTable.getColumnModel().getColumn(4).setCellRenderer(new ButtonRenderer());
+        //viewPatientsTable.getColumnModel().getColumn(4).setCellEditor(new ButtonEditor(new JTextField()));
         
-        System.out.println(PatientList.size());                      
+        //setDefaultCloseOperation(EXIT_ON_CLOSE);
+        //System.out.println(PatientList.size());                      
         
         DocBotPanel.removeAll();
         DocBotPanel.add(viewPatientPanel);
