@@ -20,9 +20,9 @@
               <EmptySpace max="-2" attributes="0"/>
               <Component id="cmdEdit" max="32767" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
-              <Component id="cmdView" min="-2" pref="38" max="-2" attributes="0"/>
+              <Component id="cmdDelete" min="-2" pref="38" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
-              <Component id="cmdDelete" min="-2" pref="76" max="-2" attributes="0"/>
+              <Component id="cmdView" min="-2" pref="76" max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -31,9 +31,9 @@
           <Group type="102" alignment="1" attributes="0">
               <EmptySpace max="32767" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="cmdDelete" alignment="3" min="-2" pref="16" max="-2" attributes="0"/>
-                  <Component id="cmdEdit" alignment="3" pref="0" max="32767" attributes="0"/>
                   <Component id="cmdView" alignment="3" min="-2" pref="16" max="-2" attributes="0"/>
+                  <Component id="cmdEdit" alignment="3" pref="0" max="32767" attributes="0"/>
+                  <Component id="cmdDelete" alignment="3" min="-2" pref="16" max="-2" attributes="0"/>
               </Group>
               <EmptySpace max="32767" attributes="0"/>
           </Group>
@@ -54,7 +54,7 @@
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cmdEditActionPerformed"/>
       </Events>
     </Component>
-    <Component class="cellModifier.ActionButton" name="cmdDelete">
+    <Component class="cellModifier.ActionButton" name="cmdView">
       <Properties>
         <Property name="text" type="java.lang.String" value="View Encounter"/>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
@@ -71,10 +71,10 @@
         </Property>
       </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cmdDeleteActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cmdViewActionPerformed"/>
       </Events>
     </Component>
-    <Component class="cellModifier.ActionButton" name="cmdView">
+    <Component class="cellModifier.ActionButton" name="cmdDelete">
       <Properties>
         <Property name="text" type="java.lang.String" value="Delete"/>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
@@ -91,7 +91,7 @@
         </Property>
       </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cmdViewActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cmdDeleteActionPerformed"/>
       </Events>
     </Component>
   </SubComponents>

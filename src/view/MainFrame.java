@@ -1122,7 +1122,7 @@ public String role;
         
         // Display Patients
         DefaultTableModel patientModel = new DefaultTableModel();
-        
+        //DefaultTableModel model = (DefaultTableModel)HospitalDetails.getModel();
          patientModel.setRowCount(0);
        Object rowData[] = new Object[5]; 
        
@@ -1176,22 +1176,25 @@ public String role;
         // rowData[5] = new JButton("Delete");
         // rowData[6] = new JButton("View Encounter");
         patientModel.addRow(rowData);
+        
         }
        
         TableActionEvent event = new TableActionEvent() {
             @Override
             public void onEdit(int row) {
-                
-                System.out.println("Edit row:" + row);
+               String contactNo = patientModel.getValueAt(row, 3).toString();
+                PatientList.get(row).setContactNumber(contactNo);
+               
             }
 
             @Override
             public void onDelete(int row) {
-                if(viewPatientsTable.isEditing()){
+                
+                 if(viewPatientsTable.isEditing()){
                     viewPatientsTable.getCellEditor().stopCellEditing();
                 }
-               // DefaultTableModel model = (DefaultTableModel) viewPatientsTable.getModel();
                 patientModel.removeRow(row);
+                PatientList.remove(row);
             }
 
            @Override
