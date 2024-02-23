@@ -1088,6 +1088,7 @@ public String role;
         HospCombo.setModel(model);
         HospCombo.setSelectedIndex(0);
         
+        errorAdmin.setText("Community Added Successfully!");
         
     }//GEN-LAST:event_ButtonCommunityActionPerformed
 
@@ -1111,7 +1112,7 @@ public String role;
         rowData[2] = HospitalList.get(i).getCommunity().getName();
         rowData[3] = HospitalList.get(i).getDoctor().getName();
         model.addRow(rowData);}
-        
+        errorAdmin.setText("New Hospital Added Successfully!");
     }//GEN-LAST:event_ButtonAddHospActionPerformed
 
     private void addPatientButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addPatientButtonActionPerformed
@@ -1140,7 +1141,7 @@ public String role;
         patientNameField.setText("");
         patientIdField.setText("");
         patientContactNoField.setText("");
-        
+        newPatientError.setText("Patient Added Successfully!");
     }//GEN-LAST:event_addPatientButtonActionPerformed
 
     private void addEncounterButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addEncounterButtonActionPerformed
@@ -1163,6 +1164,7 @@ public String role;
             if(PatientList.get(i).getPatientID().toString().equals(patientId.toString()))
             {
                 EncounterList.add(new Encounter(EncounterList.size() + 1, LocalDate.parse(format1.format(encounterDateField.getCalendar().getTime()),DateTimeFormatter.ISO_DATE) , PatientList.get(i), vitals, encounterDiagnosisField.getText()));
+                errorEncounter.setText("New Encounter Added Successfully!");
             }
             else
             {
