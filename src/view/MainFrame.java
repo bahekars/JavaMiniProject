@@ -411,11 +411,6 @@ public String role;
                 patientIdFieldFocusLost(evt);
             }
         });
-        patientIdField.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                patientIdFieldActionPerformed(evt);
-            }
-        });
 
         patientContactNoField.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusLost(java.awt.event.FocusEvent evt) {
@@ -976,10 +971,6 @@ public String role;
         
     }//GEN-LAST:event_searchButtonActionPerformed
 
-    private void patientIdFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_patientIdFieldActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_patientIdFieldActionPerformed
-
     private void newPatientViewButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_newPatientViewButtonActionPerformed
         // TODO add your handling code here:
         DocBotPanel.removeAll();
@@ -1261,6 +1252,7 @@ public String role;
         };
         viewPatientsTable.getColumnModel().getColumn(4).setCellRenderer(new TableActionCellRender());
         viewPatientsTable.getColumnModel().getColumn(4).setCellEditor(new TableActionCellEditor(event));
+        viewPatientsTable.getColumnModel().getColumn(4).setPreferredWidth(175);
         //viewPatientsTable.getColumnModel().getColumn(4).setCellRenderer(new ButtonRenderer());
         //viewPatientsTable.getColumnModel().getColumn(4).setCellEditor(new ButtonEditor(new JTextField()));
         
