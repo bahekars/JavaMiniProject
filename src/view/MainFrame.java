@@ -90,6 +90,19 @@ public String role;
         SimpleDateFormat format1 = new SimpleDateFormat("yyyy-MM-dd");
         Encounter encounter1 = new Encounter(1, LocalDate.parse("2024-01-20", DateTimeFormatter.ISO_DATE), PatientList.get(0), new VitalSign(1, 76, 65, 77, 98),"All Good");        
         EncounterList.add(encounter1);
+        
+       DefaultTableModel hospModel = (DefaultTableModel)viewHospitalTable.getModel();
+       hospModel.setRowCount(0);
+       Object rowData[] = new Object[4]; 
+
+       for(int i = 0; i < HospitalList.size(); i++)
+        {
+          
+        rowData[0] = HospitalList.get(i).getName();
+        rowData[1] = HospitalList.get(i).getLocation();
+        rowData[2] = HospitalList.get(i).getCommunity().getName();
+        rowData[3] = HospitalList.get(i).getDoctor().getName();
+        hospModel.addRow(rowData);}
       }
 
     /**
@@ -1113,6 +1126,8 @@ public String role;
         rowData[3] = HospitalList.get(i).getDoctor().getName();
         model.addRow(rowData);}
         errorAdmin.setText("New Hospital Added Successfully!");
+        TextHospName.setText("");
+        TextHospLoc.setText("");
     }//GEN-LAST:event_ButtonAddHospActionPerformed
 
     private void addPatientButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addPatientButtonActionPerformed
