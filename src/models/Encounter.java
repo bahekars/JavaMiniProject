@@ -17,6 +17,15 @@ public class Encounter {
     private Patient patient;
     private VitalSign vitalSign;
     private String diagnosis;
+    
+    public void setPatient(Patient patient) {
+        this.patient = patient;
+    }
+
+    public Patient getPatient() {
+        return patient;
+    }
+
 
     public LocalDate getDate() {
         return date;

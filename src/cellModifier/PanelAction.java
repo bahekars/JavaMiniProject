@@ -54,8 +54,8 @@ public class PanelAction extends javax.swing.JPanel {
     private void initComponents() {
 
         cmdEdit = new cellModifier.ActionButton();
-        cmdDelete = new cellModifier.ActionButton();
         cmdView = new cellModifier.ActionButton();
+        cmdDelete = new cellModifier.ActionButton();
 
         cmdEdit.setText("Update");
         cmdEdit.setAlignmentY(0.0F);
@@ -67,18 +67,7 @@ public class PanelAction extends javax.swing.JPanel {
             }
         });
 
-        cmdDelete.setText("View Encounter");
-        cmdDelete.setFont(new java.awt.Font("Segoe UI", 0, 10)); // NOI18N
-        cmdDelete.setMaximumSize(new java.awt.Dimension(44, 44));
-        cmdDelete.setMinimumSize(new java.awt.Dimension(44, 44));
-        cmdDelete.setPreferredSize(new java.awt.Dimension(44, 44));
-        cmdDelete.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cmdDeleteActionPerformed(evt);
-            }
-        });
-
-        cmdView.setText("Delete");
+        cmdView.setText("View Encounter");
         cmdView.setFont(new java.awt.Font("Segoe UI", 0, 10)); // NOI18N
         cmdView.setMaximumSize(new java.awt.Dimension(44, 44));
         cmdView.setMinimumSize(new java.awt.Dimension(44, 44));
@@ -86,6 +75,17 @@ public class PanelAction extends javax.swing.JPanel {
         cmdView.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cmdViewActionPerformed(evt);
+            }
+        });
+
+        cmdDelete.setText("Delete");
+        cmdDelete.setFont(new java.awt.Font("Segoe UI", 0, 10)); // NOI18N
+        cmdDelete.setMaximumSize(new java.awt.Dimension(44, 44));
+        cmdDelete.setMinimumSize(new java.awt.Dimension(44, 44));
+        cmdDelete.setPreferredSize(new java.awt.Dimension(44, 44));
+        cmdDelete.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cmdDeleteActionPerformed(evt);
             }
         });
 
@@ -97,18 +97,18 @@ public class PanelAction extends javax.swing.JPanel {
                 .addContainerGap()
                 .addComponent(cmdEdit, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(cmdView, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(cmdDelete, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(cmdDelete, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(cmdView, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(cmdDelete, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cmdView, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(cmdEdit, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                    .addComponent(cmdView, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(cmdDelete, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
@@ -117,13 +117,13 @@ public class PanelAction extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_cmdEditActionPerformed
 
-    private void cmdDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdDeleteActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_cmdDeleteActionPerformed
-
     private void cmdViewActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdViewActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_cmdViewActionPerformed
+
+    private void cmdDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdDeleteActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cmdDeleteActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

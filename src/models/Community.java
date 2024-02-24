@@ -16,13 +16,13 @@ public class Community {
     private Integer communityID;
     private String name;
     
-    public List<String> getList()
-    {
-        List<String> commName = new ArrayList<String>();
-        commName.add(("Toronto"));
-        commName.add(("Vancouver"));
-        return commName;
-    }
+//    public List<String> getList()
+//    {
+//        List<String> commName = new ArrayList<String>();
+//        commName.add(("Toronto"));
+//        commName.add(("Vancouver"));
+//        return commName;
+//    }
 
     public Community() {
 
